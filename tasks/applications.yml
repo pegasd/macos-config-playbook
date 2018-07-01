@@ -1,0 +1,24 @@
+- name: cask
+  homebrew_tap:
+    name: homebrew/cask
+    state: present
+
+- name: cask-versions
+  homebrew_tap:
+    name: homebrew/cask-versions
+    state: present
+
+- name: Vim
+  homebrew:
+    name: vim
+    state: latest
+
+- name: Mercurial
+  homebrew:
+    name: mercurial
+    state: latest
+
+- name: CVS
+  homebrew:
+    name: cvs
+    state: present

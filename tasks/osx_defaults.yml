@@ -1,0 +1,6 @@
+# Disable Password Hints at Login
+- osx_defaults:
+    domain: com.apple.loginwindow
+    key: RetriesUntilHint
+    type: int
+    value: 0
