@@ -1,24 +1,16 @@
-- name: cask
+- name: brew cask
   homebrew_tap:
     name: homebrew/cask
     state: present
 
-- name: cask-versions
-  homebrew_tap:
-    name: homebrew/cask-versions
+- name: Ensure brew packages
+  homebrew:
+    name: "{{ item }}"
     state: present
-
-- name: Vim
-  homebrew:
-    name: vim
-    state: latest
-
-- name: Mercurial
-  homebrew:
-    name: mercurial
-    state: latest
-
-- name: CVS
-  homebrew:
-    name: cvs
-    state: present
+  loop:
+    - vim
+    - mercurial
+    - cvs
+    - grep
+    - jq
+    - python
