@@ -14,3 +14,14 @@
     - grep
     - jq
     - python
+
+- name: Ensure brew casks
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - jetbrains-toolbox
+    - dash
+    - google-chrome
+    - istat-menus
+    - iterm2
