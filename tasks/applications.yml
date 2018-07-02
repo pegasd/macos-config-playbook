@@ -1,9 +1,7 @@
-- name: brew cask
-  homebrew_tap:
-    name: homebrew/cask
-    state: present
-
-- name: Ensure brew packages
+#
+# Packages
+#
+- name: Regular brew packages
   homebrew:
     name: "{{ item }}"
     state: present
@@ -14,8 +12,17 @@
     - grep
     - jq
     - python
+    - kubectl
 
-- name: Ensure brew casks
+#
+# Casks
+#
+- name: Cask brew tap
+  homebrew_tap:
+    name: homebrew/cask
+    state: present
+
+- name: Brew casks
   homebrew_cask:
     name: "{{ item }}"
     state: present
@@ -26,8 +33,11 @@
     - istat-menus
     - iterm2
     - 1password6
+    - google-cloud-sdk
 
+#
 # App Store
+#
 # - Slack
 # - Spark
 # - Magnet
