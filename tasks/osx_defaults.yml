@@ -1,17 +1,30 @@
-# Disable Password Hints at Login
-- osx_defaults:
+- name: Disable Password Hints at Login
+  osx_defaults:
     domain: com.apple.loginwindow
     key: RetriesUntilHint
     type: int
     value: 0
 
+- name: Upper-Left Corner -> Screen Saver
+  osx_defaults:
+    domain: com.apple.dock
+    key: "{{ item.name }}"
+    type: int
+    value: "{{ item.value }}"
+  loop:
+    - name: wvous-tl-corner
+      value: 5
+    - name: wvous-tl-modifier
+      value: 0
+
 # TODO:
-# - screenshot location -> ~/Desktop/screenshots (+ mkdir)
-# - Energy Saver
-# - Date & Time
-#   - 24-hour
-#   - Don't show the day of the week
-# - Keyboard
-#   - Caps Lock -> Control
-#   - Control -> Escape
-#   - All shortcuts
+# Security -> General -> Require password 'immediately'
+# screenshot location -> ~/Desktop/screenshots (+ mkdir)
+# Energy Saver
+# Date & Time
+#  - 24-hour
+#  - Don't show the day of the week
+# Keyboard
+#  - Caps Lock -> Control
+#  - Control -> Escape
+#  - All shortcuts
