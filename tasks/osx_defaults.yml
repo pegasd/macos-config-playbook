@@ -4,3 +4,14 @@
     key: RetriesUntilHint
     type: int
     value: 0
+
+# TODO:
+# - screenshot location -> ~/Desktop/screenshots (+ mkdir)
+# - Energy Saver
+# - Date & Time
+#   - 24-hour
+#   - Don't show the day of the week
+# - Keyboard
+#   - Caps Lock -> Control
+#   - Control -> Escape
+#   - All shortcuts
