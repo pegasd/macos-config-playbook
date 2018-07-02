@@ -17,9 +17,14 @@
 #
 # Casks
 #
-- name: Cask brew tap
+- name: Homebrew cask tap
   homebrew_tap:
     name: homebrew/cask
+    state: present
+
+- name: PuppetLabs cask tap
+  homebrew_tap:
+    name: puppetlabs/puppet
     state: present
 
 - name: Brew casks
@@ -34,6 +39,7 @@
     - iterm2
     - 1password6
     - google-cloud-sdk
+    - pdk
 
 #
 # App Store
