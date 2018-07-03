@@ -18,6 +18,20 @@
     - name: wvous-tl-modifier
       value: 0
 
+- name: Do NOT use smart quotes and dashes
+  osx_defaults:
+    domain: .GlobalPreferences
+    key: "{{ item }}"
+    type: bool
+    value: false
+  loop:
+    - NSAutomaticDashSubstitutionEnabled
+    - NSAutomaticQuoteSubstitutionEnabled
+
+# TODO: How to make this idempotent?
+# - name: Show Spotlight Search > ^Space
+#   command: defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '{ enabled = 1; value = { parameters = (32, 49, 262144); type = standard; }; }'
+
 # TODO:
 # Security -> General -> Require password 'immediately'
 # screenshot location -> ~/Desktop/screenshots (+ mkdir)
