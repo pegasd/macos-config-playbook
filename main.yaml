@@ -1,0 +1,12 @@
+---
+- name: Configure macOS
+  hosts: localhost
+
+  tasks:
+    - include: tasks/osx_defaults.yaml
+      tags: [ osx_defaults ]
+    - include: tasks/applications.yaml
+      tags: [ applications ]
+    - include: tasks/dotfiles.yaml
+      tags: [ applications, dotfiles ]
+...

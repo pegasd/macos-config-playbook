@@ -1,0 +1,22 @@
+---
+- name: Various dotfiles
+  copy:
+    src: dotfiles/
+    dest: '~'
+
+- name: Vim plugins
+  git:
+    dest: '~/.vim/bundle/{{ item.name }}'
+    repo: 'https://github.com/{{ item.repo }}'
+    update: false
+  loop:
+    - name: syntastic
+      repo: vim-syntastic/syntastic
+    - name: tabular
+      repo: godlygeek/tabular
+
+- name: history directory
+  file:
+    path: ~/.history
+    state: directory
+    mode: 0750

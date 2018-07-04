@@ -1,7 +1,0 @@
----
-- name: Configure macOS
-  hosts: localhost
-
-  tasks:
-    - include_tasks: tasks/osx_defaults.yml
-    - include_tasks: tasks/applications.yml

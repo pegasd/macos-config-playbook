@@ -10,10 +10,11 @@
     - vim
     - mercurial
     - cvs
-    - grep
+    - grep # GNU Grep is nice
     - jq
     - python
     - kubectl
+    - most
 
 #
 # Casks
