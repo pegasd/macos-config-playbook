@@ -35,6 +35,7 @@
     state: present
   loop:
     - jetbrains-toolbox
+    - java
     - dash
     - google-chrome
     - istat-menus
