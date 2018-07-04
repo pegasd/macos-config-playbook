@@ -42,6 +42,7 @@
     - 1password6
     - google-cloud-sdk
     - pdk
+    - docker
 
 #
 # App Store
