@@ -1,36 +1,74 @@
 ---
+# Security
 - name: Disable Password Hints at Login
-  osx_defaults:
-    domain: com.apple.loginwindow
-    key: RetriesUntilHint
-    type: int
-    value: 0
+  osx_defaults: domain=com.apple.loginwindow key=RetriesUntilHint type=int value=0
+
+- name: Require password immediately after sleep or screen saver
+  osx_defaults: domain=com.apple.screensaver key={{ item.name }} type=int value={{ item.value }}
+  loop: [{ name: askForPassword, value: 1 }, { name: askForPasswordDelay, value: 5 }]
 
 - name: Upper-Left Corner -> Screen Saver
+  osx_defaults: domain=com.apple.dock key={{ item.name }} type=int value={{ item.value }}
+  loop: [{ name: wvous-tl-corner, value: 5 }, { name: wvous-tl-modifier, value: 0 }]
+
+# Usability
+- name: Do NOT use smart quotes and dashes
+  osx_defaults: key={{ item }} type=bool value=false
+  loop: [ NSAutomaticDashSubstitutionEnabled, NSAutomaticQuoteSubstitutionEnabled ]
+
+- name: Full Keyboard Access
+  osx_defaults: key=AppleKeyboardUIMode type=int value=0
+
+- name: Keyboard repeat rate
+  osx_defaults: key={{ item.name }} type=int value={{ item.value }}
+  loop: [{ name: InitialKeyRepeat, value: 20 }, { name: KeyRepeat, value: 1 }]
+
+- name: Disable auto-correct
+  osx_defaults: key=NSAutomaticSpellingCorrectionEnabled type=bool value=false
+
+- name: Enable zoom
+  osx_defaults: domain=com.apple.universalaccess key=closeViewScrollWheelToggle type=bool value=true
+
+- name: ^ + scroll to zoom
+  osx_defaults: domain=com.apple.universalaccess key=HIDScrollZoomModifierMask type=int value=262144
+
+# Screenshots
+- name: Screenshot format
+  osx_defaults: domain=com.apple.screencapture key=type value=png
+
+# Dock
+- name: Dock tile size
+  osx_defaults: domain=com.apple.dock key=tilesize type=float value=35
+
+- name: Dock magnified tile size
+  osx_defaults: domain=com.apple.dock key=largesize type=float value=66
+
+- name: Tile magnification on
+  osx_defaults: domain=com.apple.dock key=magnification type=bool value=true
+
+- name: Dock minimize effect
+  osx_defaults: domain=com.apple.dock key=mineffect value=genie
+
+- name: Auto-hide dock
+  osx_defaults: domain=com.apple.dock key=autohide type=bool value=true
+
+- name: Remove all icons from dock
   osx_defaults:
     domain: com.apple.dock
-    key: "{{ item.name }}"
-    type: int
-    value: "{{ item.value }}"
-  loop:
-    - name: wvous-tl-corner
-      value: 5
-    - name: wvous-tl-modifier
-      value: 0
+    key: persistent-apps
+    type: array
+    value: []
 
-- name: Do NOT use smart quotes and dashes
-  osx_defaults:
-    domain: .GlobalPreferences
-    key: "{{ item }}"
-    type: bool
-    value: false
-  loop:
-    - NSAutomaticDashSubstitutionEnabled
-    - NSAutomaticQuoteSubstitutionEnabled
+- name: Dock location
+  osx_defaults: domain=com.apple.dock key=orientation value=right
 
 # TODO: How to make this idempotent?
 # - name: Show Spotlight Search > ^Space
 #   command: defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '{ enabled = 1; value = { parameters = (32, 49, 262144); type = standard; }; }'
+
+# TODO: How to make this idempotent?
+# - name: Screenshot location
+#   osx_defaults: domain=com.apple.screencapture key=location value=~/Desktop/screenshots
 
 # TODO:
 # Security -> General -> Require password 'immediately'
