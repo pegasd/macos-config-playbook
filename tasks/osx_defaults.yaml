@@ -66,13 +66,11 @@
 # - name: Show Spotlight Search > ^Space
 #   command: defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '{ enabled = 1; value = { parameters = (32, 49, 262144); type = standard; }; }'
 
-# TODO: How to make this idempotent?
+# TODO: How to make this idempotent yet not user-specific (no hardcoding or introdicing any variables, please)?
 # - name: Screenshot location
 #   osx_defaults: domain=com.apple.screencapture key=location value=~/Desktop/screenshots
 
 # TODO:
-# Security -> General -> Require password 'immediately'
-# screenshot location -> ~/Desktop/screenshots (+ mkdir)
 # Energy Saver
 # Date & Time
 #  - 24-hour
