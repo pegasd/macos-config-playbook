@@ -22,7 +22,7 @@ set smartcase
 set ttyfast
 set nohlsearch
 set undolevels=500
-set viminfo='100,<500,:10000,@10000,/10000,s1024,f1,h,r/tmp,n~/.history/viminfo
+set viminfo='100,<500,:10000,@10000,/10000,s1024,f1,h,r/tmp,n~/.history/viminfo'
 set mouse=a
 set list
 set listchars=tab:→\·,trail:·,nbsp:¬
@@ -51,7 +51,7 @@ syntax enable
 colorscheme pegas
 
 " RU <-> Dvorak
-set langmap=й',у.,кp,еy,нf,гg,шc,щr,зl,х/,ъ=,фa,ыo,вe,аu,пi,рd,оh,лt,дn,э-,чq,сj,мk,иx,тb,ьm,бw,юv,ё`,Я:,ГG
+set langmap="й',у.,кp,еy,нf,гg,шc,щr,зl,х/,ъ=,фa,ыo,вe,аu,пi,рd,оh,лt,дn,э-,чq,сj,мk,иx,тb,ьm,бw,юv,ё`,Я:,ГG"
 
 " Key mappings
 map ,on   :set number!<CR>
@@ -92,9 +92,9 @@ autocmd FileType groovy setlocal tabstop=4 shiftwidth=4 softtabstop=4
 execute pathogen#infect()
 
 " Syntastic
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_aggregate_errors = 1
-"let g:syntastic_puppet_puppetlint_args = "--no-140chars-check"
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_aggregate_errors = 1
+" let g:syntastic_puppet_puppetlint_args = "--no-140chars-check"
 
 " Hello / Goodbye
 autocmd VimEnter * echo "Welcome back, PegaS!"
