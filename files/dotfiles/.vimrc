@@ -22,7 +22,7 @@ set smartcase
 set ttyfast
 set nohlsearch
 set undolevels=500
-set viminfo='100,<500,:10000,@10000,/10000,s1024,f1,h,r/tmp,n~/.history/viminfo'
+set viminfo='100,<500,:10000,@10000,/10000,s1024,f1,h,r/tmp,n~/.history/viminfo
 set mouse=a
 set list
 set listchars=tab:→\·,trail:·,nbsp:¬
