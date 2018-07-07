@@ -9,7 +9,6 @@ set clipboard=unnamed
 set backspace=indent,eol,start
 set esckeys
 set incsearch
-set history=500
 set matchtime=7
 set matchpairs=(:),[:],{:},<:>
 set noerrorbells
@@ -21,8 +20,6 @@ set modeline
 set smartcase
 set ttyfast
 set nohlsearch
-set undolevels=500
-set viminfo='100,<500,:10000,@10000,/10000,s1024,f1,h,r/tmp,n~/.history/viminfo
 set mouse=a
 set list
 set listchars=tab:→\·,trail:·,nbsp:¬
@@ -99,3 +96,8 @@ execute pathogen#infect()
 " Hello / Goodbye
 autocmd VimEnter * echo "Welcome back, PegaS!"
 autocmd VimLeave * echo "Peace! \/"
+
+" History
+set history=500
+set undolevels=500
+set viminfo='100,<500,:10000,@10000,/10000,s1024,f1,h,r/tmp,n~/.history/viminfo
