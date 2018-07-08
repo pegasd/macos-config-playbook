@@ -32,6 +32,12 @@
 - name: ^ + scroll to zoom
   osx_defaults: domain=com.apple.universalaccess key=HIDScrollZoomModifierMask type=int value=262144
 
+- name: Disable Ask Siri
+  osx_defaults: domain=com.apple.assistant.support key='Assistant Enabled' type=bool value=false
+
+- name: Disable Siri menubar icon
+  osx_defaults: domain=com.apple.Siri key=StatusMenuVisible type=bool value=false
+
 # Screenshots
 - name: Screenshot format
   osx_defaults: domain=com.apple.screencapture key=type value=png
@@ -62,19 +68,17 @@
 - name: Dock location
   osx_defaults: domain=com.apple.dock key=orientation value=right
 
-# TODO: How to make this idempotent?
-# - name: Show Spotlight Search > ^Space
-#   command: defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '{ enabled = 1; value = { parameters = (32, 49, 262144); type = standard; }; }'
-
-# TODO: How to make this idempotent yet not user-specific (no hardcoding or introdicing any variables, please)?
-# - name: Screenshot location
-#   osx_defaults: domain=com.apple.screencapture key=location value=~/Desktop/screenshots
-
 # TODO:
+# Language & Region
+# Software Update
+# Accessibility (is this even possible?)
+# General (Dark mode, etc)
+# Spotlight settings
 # Energy Saver
-# Date & Time
-#  - 24-hour
-#  - Don't show the day of the week
+# Night Shift
+# Sharing
+#  - Computer Name
+#  - Remote Login
 # Keyboard
 #  - Caps Lock -> Control
 #  - Control -> Escape
