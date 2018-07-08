@@ -56,6 +56,7 @@ map ,or   :set relativenumber!<CR>
 map ,op   :set paste!<CR>
 map ,oh   :set hlsearch!<CR>
 map ,ol   :set list!<CR>
+map ,ot   :set expandtab!<CR>
 
 map ,oi2  :set tabstop=2 shiftwidth=2 softtabstop=2<CR>
 map ,oi4  :set tabstop=4 shiftwidth=4 softtabstop=4<CR>
