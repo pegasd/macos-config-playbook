@@ -6,6 +6,10 @@ set -x -e
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
+###############
+#  Spotlight  #
+###############
+
 # Disable Spotlight indexing for any volume that gets mounted and has not yet
 # been indexed before.
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
@@ -47,3 +51,19 @@ sudo mdutil -i on / > /dev/null
 
 # Rebuild the index from scratch
 sudo mdutil -E / > /dev/null
+
+##############
+#  Keyboard  #
+##############
+
+# Show Spotlight Search > ctrl + space
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '{ enabled = 1; value = { parameters = (32, 49, 1048576); type = standard; }; }'
+
+# Select the previous input source > cmd + space
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 '{ enabled = 1; value = { parameters = (32, 49, 262144); type = standard; }; }'
+
+#################
+#  Screenshots  #
+#################
+
+defaults write com.apple.screencapture location -string ~/Desktop/screenshots
