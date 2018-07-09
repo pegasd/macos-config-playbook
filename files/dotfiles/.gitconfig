@@ -5,6 +5,7 @@ email = thepegasd@gmail.com
 [alias]
 d        = diff
 co       = checkout
+ci       = commit
 st       = status --short
 lst      = status
 pst      = status --porcelain
