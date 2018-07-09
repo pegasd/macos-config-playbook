@@ -29,9 +29,20 @@
 - name: Enable zoom
   osx_defaults: domain=com.apple.universalaccess key=closeViewScrollWheelToggle type=bool value=true
 
-- name: ^ + scroll to zoom
+- name: ctrl + scroll to zoom
   osx_defaults: domain=com.apple.universalaccess key=HIDScrollZoomModifierMask type=int value=262144
 
+# Color theme
+- name: Dark Mode ON
+  osx_defaults: key=AppleInterfaceStyle value=Dark
+
+- name: Green Highlight Color
+  osx_defaults: key=AppleHighlightColor value='0.752941 0.964706 0.678431 Green'
+
+- name: Color Variant
+  osx_defaults: key=AppleAquaColorVariant type=int value=6
+
+# Siri
 - name: Disable Ask Siri
   osx_defaults: domain=com.apple.assistant.support key='Assistant Enabled' type=bool value=false
 
@@ -59,11 +70,7 @@
   osx_defaults: domain=com.apple.dock key=autohide type=bool value=true
 
 - name: Remove all icons from dock
-  osx_defaults:
-    domain: com.apple.dock
-    key: persistent-apps
-    type: array
-    value: []
+  osx_defaults: { domain: com.apple.dock, key: persistent-apps, type: array, value: [] }
 
 - name: Dock location
   osx_defaults: domain=com.apple.dock key=orientation value=right
