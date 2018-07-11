@@ -1,7 +1,14 @@
 ---
 - name: Configure macOS
   hosts: localhost
-
+  vars:
+    dotfiles_repo: pegasd/dotfiles
+    update_git_repos: false
+    vim_plugins:
+      - name: syntastic
+        repo: vim-syntastic/syntastic
+      - name: tabular
+        repo: godlygeek/tabular
   tasks:
     - include: tasks/osx_defaults.yaml
       tags: [ osx_defaults ]

@@ -1,19 +1,28 @@
 ---
-- name: Various dotfiles
-  copy:
-    src: dotfiles/
+- name: Bring over my dotfiles
+  git:
+    dest: '~/.dotfiles'
+    repo: 'https://github.com/{{ dotfiles_repo }}'
+    update: '{{ update_git_repos }}'
+    force: '{{ update_git_repos }}'
+
+- name: rsync '~/.dotfiles' -> '~'
+  synchronize:
+    src: '~/.dotfiles/'
     dest: '~'
+    archive: true
+    rsync_opts:
+      - '--exclude=.git'
+      - '--exclude=LICENSE'
+      - '--exclude=*.md'
 
 - name: Vim plugins
   git:
     dest: '~/.vim/bundle/{{ item.name }}'
     repo: 'https://github.com/{{ item.repo }}'
-    update: false
-  loop:
-    - name: syntastic
-      repo: vim-syntastic/syntastic
-    - name: tabular
-      repo: godlygeek/tabular
+    update: '{{ update_git_repos }}'
+    force: '{{ update_git_repos }}'
+  loop: '{{ vim_plugins }}'
 
 - name: history directory
   file:
