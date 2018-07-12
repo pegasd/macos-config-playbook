@@ -3,8 +3,8 @@
   git:
     dest: '~/.dotfiles'
     repo: 'https://github.com/{{ dotfiles_repo }}'
-    update: '{{ update_git_repos }}'
-    force: '{{ update_git_repos }}'
+    update: '{{ update_dotfiles }}'
+    force: '{{ update_dotfiles }}'
 
 - name: rsync '~/.dotfiles' -> '~'
   synchronize:
@@ -20,8 +20,8 @@
   git:
     dest: '~/.vim/bundle/{{ item.name }}'
     repo: 'https://github.com/{{ item.repo }}'
-    update: '{{ update_git_repos }}'
-    force: '{{ update_git_repos }}'
+    update: '{{ update_vim_plugins }}'
+    force: '{{ update_vim_plugins }}'
   loop: '{{ vim_plugins }}'
 
 - name: history directory

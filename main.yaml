@@ -2,8 +2,31 @@
 - name: Configure macOS
   hosts: localhost
   vars:
+    update_dotfiles: true
     dotfiles_repo: pegasd/dotfiles
-    update_git_repos: false
+    brew_packages:
+      - pssh
+      - vim
+      - mercurial
+      - cvs
+      - grep # GNU Grep is nice
+      - jq
+      - python
+      - kubectl
+      - most
+    brew_cask_packages:
+      - transmission
+      - jetbrains-toolbox
+      - java
+      - dash
+      - google-chrome
+      - istat-menus
+      - iterm2
+      - 1password6
+      - google-cloud-sdk
+      - pdk
+      - docker
+    update_vim_plugins: false
     vim_plugins:
       - name: syntastic
         repo: vim-syntastic/syntastic

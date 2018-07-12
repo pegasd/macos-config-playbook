@@ -4,17 +4,9 @@
 #
 - name: Regular brew packages
   homebrew:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
-  loop:
-    - vim
-    - mercurial
-    - cvs
-    - grep # GNU Grep is nice
-    - jq
-    - python
-    - kubectl
-    - most
+  loop: '{{ brew_packages }}'
 
 #
 # Casks
@@ -31,20 +23,9 @@
 
 - name: Brew casks
   homebrew_cask:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
-  loop:
-    - transmission
-    - jetbrains-toolbox
-    - java
-    - dash
-    - google-chrome
-    - istat-menus
-    - iterm2
-    - 1password6
-    - google-cloud-sdk
-    - pdk
-    - docker
+  loop: '{{ brew_cask_packages }}'
 
 #
 # App Store
