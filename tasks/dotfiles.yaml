@@ -28,4 +28,4 @@
   file:
     path: ~/.history
     state: directory
-    mode: 0750
+    mode: 0700
