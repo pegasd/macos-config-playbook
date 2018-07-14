@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -x -e
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+##############
+#  Keyboard  #
+##############
+
+# Input Sources > Select next source in input menu
+defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 61 "<dict><key>enabled</key><false/></dict>"
+
+# Input Sources > Select the previous input source
+#  ~> Cmd + Space
+defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 60 \
+  "<dict><key>enabled</key><true/><key>value</key><dict><key>type</key><string>standard</string>
+    <key>parameters</key><array><integer>32</integer><integer>49</integer><integer>1048576</integer></array></dict></dict>"
+
+# Spotlight > Show Spotlight search
+#  ~> Ctrl + Space
+defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 64 \
+  "<dict><key>enabled</key><true/><key>value</key><dict><key>type</key><string>standard</string>
+    <key>parameters</key><array><integer>32</integer><integer>49</integer><integer>262144</integer></array></dict></dict>"
+
+#################
+#  Screenshots  #
+#################
+
+# Screenshot location
+defaults write com.apple.screencapture location -string ~/Desktop/screenshots
+
+# Restart defaults server to apply settings
+killall cfprefsd

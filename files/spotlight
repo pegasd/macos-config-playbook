@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+set -x -e
+
+# Close System Preferences to prevent interference
+osascript -e 'tell application "System Preferences" to quit'
+
+# Disable Spotlight indexing for any volume that gets mounted and has not yet
+# been indexed before.
+sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+
+# Spotlight categories
+defaults write com.apple.spotlight orderedItems -array \
+  '<dict> <key>enabled</key> <true/>  <key>name</key> <string>APPLICATIONS</string>               </dict>' \
+  '<dict> <key>enabled</key> <true/>  <key>name</key> <string>SYSTEM_PREFS</string>               </dict>' \
+  '<dict> <key>enabled</key> <true/>  <key>name</key> <string>CONTACT</string>                    </dict>' \
+  '<dict> <key>enabled</key> <true/>  <key>name</key> <string>EVENT_TODO</string>                 </dict>' \
+  '<dict> <key>enabled</key> <true/>  <key>name</key> <string>MENU_DEFINITION</string>            </dict>' \
+  '<dict> <key>enabled</key> <true/>  <key>name</key> <string>MENU_CONVERSION</string>            </dict>' \
+  '<dict> <key>enabled</key> <true/>  <key>name</key> <string>SOURCE</string>                     </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>DOCUMENTS</string>                  </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>DIRECTORIES</string>                </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>PRESENTATIONS</string>              </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>SPREADSHEETS</string>               </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>PDF</string>                        </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>MESSAGES</string>                   </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>IMAGES</string>                     </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>BOOKMARKS</string>                  </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>MUSIC</string>                      </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>MOVIES</string>                     </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>FONTS</string>                      </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>MENU_EXPRESSION</string>            </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>MENU_SPOTLIGHT_SUGGESTIONS</string> </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>MENU_OTHER</string>                 </dict>' \
+
+# Load new settings before rebuilding the index
+sudo killall mds > /dev/null 2>&1
+
+# Make sure indexing is enabled for the main volume
+sudo mdutil -i on / > /dev/null
+
+# Rebuild the index from scratch
+sudo mdutil -E / > /dev/null
+
+# Restart defaults server to apply settings
+killall cfprefsd
