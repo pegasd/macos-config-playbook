@@ -2,8 +2,7 @@
 
 set -x -e
 
-# Close any open System Preferences panes, to prevent them from overriding
-# settings we’re about to change
+# Close System Preferences to prevent interference
 osascript -e 'tell application "System Preferences" to quit'
 
 ##############

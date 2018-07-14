@@ -5,6 +5,10 @@ set -x -e
 # Close System Preferences to prevent interference
 osascript -e 'tell application "System Preferences" to quit'
 
+###############
+#  Spotlight  #
+###############
+
 # Disable Spotlight indexing for any volume that gets mounted and has not yet
 # been indexed before.
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
