@@ -17,7 +17,7 @@ defaults write com.apple.spotlight orderedItems -array \
   '<dict> <key>enabled</key> <true/>  <key>name</key> <string>EVENT_TODO</string>                 </dict>' \
   '<dict> <key>enabled</key> <true/>  <key>name</key> <string>MENU_DEFINITION</string>            </dict>' \
   '<dict> <key>enabled</key> <true/>  <key>name</key> <string>MENU_CONVERSION</string>            </dict>' \
-  '<dict> <key>enabled</key> <true/>  <key>name</key> <string>SOURCE</string>                     </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>SOURCE</string>                     </dict>' \
   '<dict> <key>enabled</key> <false/> <key>name</key> <string>DOCUMENTS</string>                  </dict>' \
   '<dict> <key>enabled</key> <false/> <key>name</key> <string>DIRECTORIES</string>                </dict>' \
   '<dict> <key>enabled</key> <false/> <key>name</key> <string>PRESENTATIONS</string>              </dict>' \
