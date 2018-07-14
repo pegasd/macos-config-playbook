@@ -15,6 +15,7 @@
       - kubectl
       - most
     brew_cask_packages:
+      - slack
       - transmission
       - jetbrains-toolbox
       - java
