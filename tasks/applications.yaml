@@ -21,11 +21,17 @@
     name: puppetlabs/puppet
     state: present
 
-- name: Brew casks
+- name: Brew absent casks
+  homebrew_cask:
+    name: '{{ item }}'
+    state: absent
+  loop: '{{ brew_absent_casks }}'
+
+- name: Brew present casks
   homebrew_cask:
     name: '{{ item }}'
     state: present
-  loop: '{{ brew_cask_packages }}'
+  loop: '{{ brew_present_casks }}'
 
 #
 # App Store

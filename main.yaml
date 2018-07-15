@@ -14,10 +14,10 @@
       - python
       - kubectl
       - most
-    brew_cask_packages:
+    brew_present_casks:
+      - intellij-idea
       - slack
       - transmission
-      - jetbrains-toolbox
       - java
       - dash
       - google-chrome
@@ -27,6 +27,8 @@
       - google-cloud-sdk
       - pdk
       - docker
+    brew_absent_casks:
+      - jetbrains-toolbox
     update_vim_plugins: false
     vim_plugins:
       - name: syntastic
