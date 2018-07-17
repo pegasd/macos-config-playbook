@@ -5,6 +5,8 @@
     update_dotfiles: true
     dotfiles_repo: pegasd/dotfiles
     brew_packages:
+      - colordiff
+      - multitail
       - pwgen
       - pssh
       - vim
