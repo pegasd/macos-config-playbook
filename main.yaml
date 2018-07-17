@@ -18,6 +18,7 @@
       - kubectl
       - most
     brew_present_casks:
+      - vlc
       - intellij-idea
       - slack
       - transmission
