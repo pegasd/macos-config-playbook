@@ -5,6 +5,7 @@
     update_dotfiles: true
     dotfiles_repo: pegasd/dotfiles
     brew_packages:
+      - pwgen
       - pssh
       - vim
       - mercurial
