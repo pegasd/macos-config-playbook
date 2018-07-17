@@ -75,6 +75,53 @@
 - name: Dock location
   osx_defaults: domain=com.apple.dock key=orientation value=right
 
+# VLC
+- name: VLC has launched before
+  osx_defaults: domain=org.videolan.vlc key=SUHasLaunchedBefore type=bool value=true
+
+- name: Disable VLC updates
+  osx_defaults: domain=org.videolan.vlc key=SUEnableAutomaticChecks type=bool value=false
+
+- name: VLC American English
+  osx_defaults:
+    domain: org.videolan.vlc
+    key: '{{ item.name }}'
+    type: '{{ item.type }}'
+    value: '{{ item.value }}'
+  loop:
+    - name: AppleTextDirection
+      type: bool
+      value: false
+    - name: NSForceRightToLeftWritingDirection
+      type: bool
+      value: false
+    - name: language
+      type: string
+      value: en
+
+# Transmission
+- name: Transmission settings
+  osx_defaults:
+    domain: org.m0k.transmission
+    key: '{{ item.name }}'
+    type: bool
+    value: '{{ item.value }}'
+  loop:
+    - { name: AutoImport, value: true }
+    - { name: DeleteOriginalTorrent, value: true }
+    - { name: DownloadAsk, value: false }
+    - { name: DownloadLocationConstant, value: true }
+    - { name: InfoVisible, value: false }
+    - { name: MagnetOpenAsk, value: false }
+    - { name: WarningLegal, value: false }
+
+- name: Transmission settings [directories]
+  osx_defaults:
+    domain: org.m0k.transmission
+    key: '{{ item }}'
+    value: /Volumes/storage/_downloads
+  loop: [ AutoImportDirectory, NSNavLastRootDirectory, DownloadFolder]
+
 # TODO:
 # Language & Region
 # Software Update
