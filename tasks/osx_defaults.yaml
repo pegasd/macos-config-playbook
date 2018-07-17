@@ -120,7 +120,7 @@
     domain: org.m0k.transmission
     key: '{{ item }}'
     value: /Volumes/storage/_downloads
-  loop: [ AutoImportDirectory, NSNavLastRootDirectory, DownloadFolder]
+  loop: [ AutoImportDirectory, NSNavLastRootDirectory, DownloadFolder ]
 
 # TODO:
 # Language & Region
