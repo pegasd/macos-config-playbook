@@ -7,14 +7,24 @@
 You'll probably need at least the following:
 
 - Xcode Command-Line Tools:
+
 ```bash
 xcode-select --install
 ```
+
 - homebrew
+
 ```bash
 # Looks scary, but seems to do the trick
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
+
+- ansible
+
+```bash
+brew install ansible
+```
+
 
 ## Running
 
