@@ -1,0 +1,106 @@
+# iTerm settings
+
+- name: iTerm (profile directory)
+  file:
+    path: '~/Library/Application Support/iTerm2/DynamicProfiles'
+    state: directory
+
+- name: iTerm (profile)
+  copy:
+    dest: '~/Library/Application Support/iTerm2/DynamicProfiles/iterm_profile.json'
+    src: 'iterm_profile.json'
+
+- name: iTerm (theme)
+  osx_defaults:
+    domain: com.googlecode.iterm2
+    key: '{{ item.name }}'
+    type: '{{ item.type }}'
+    value: '{{ item.value }}'
+  loop:
+    - { name: ShowFullScreenTabBar, type: bool, value: false }
+    - { name: ShowPaneTitles, type: bool, value: true }
+    - { name: SmartPlacement, type: bool, value: false }
+    - { name: StretchTabsToFillBar, type: bool, value: false }
+    - { name: SwitchTabModifier, type: int, value: 4 }
+    - { name: SwitchWindowModifier, type: int, value: 6 }
+    - { name: TabStyle, type: int, value: 1 }
+    - { name: TabViewType, type: int, value: 2 }
+    - { name: LeftOption, type: int, value: 2 }
+    - { name: LeftTabBarWidth, type: int, value: 50 }
+    - { name: 'NSWindow Frame SharedPreferences', type: string, value: '113 418 918 452 0 0 1440 877' }
+    - { name: 'Default Bookmark Guid', type: string, value: '1928FBA6-572C-4073-8398-1456E62B5E0A' }
+
+- name: iTerm (bools)
+  osx_defaults:
+    domain: com.googlecode.iterm2
+    key: '{{ item.name }}'
+    type: bool
+    value: '{{ item.value }}'
+  loop:
+    - { name: AdjustWindowForFontSizeChange, value: true }
+    - { name: AllowClipboardAccess, value: true }
+    - { name: AlternateMouseScroll, value: true }
+    - { name: AnimateDimming, value: false }
+    - { name: AutoHideTmuxClientSession, value: false }
+    - { name: CheckTestRelease, value: true }
+    - { name: ClosingHotkeySwitchesSpaces, value: true }
+    - { name: CommandSelection, value: true }
+    - { name: CopyLastNewline, value: false }
+    - { name: CopySelection, value: false }
+    - { name: DimBackgroundWindows, value: false }
+    - { name: DimInactiveSplitPanes, value: true }
+    - { name: DimOnlyText, value: false }
+    - { name: DisableFullscreenTransparency, value: false }
+    - { name: EnableRendezvous, value: false }
+    - { name: FocusFollowsMouse, value: false }
+    - { name: HiddenAdvancedFontRendering, value: false }
+    - { name: HideActivityIndicator, value: false }
+    - { name: HideMenuBarInFullscreen, value: true }
+    - { name: HideScrollbar, value: true }
+    - { name: HideTab, value: false }
+    - { name: HideTabCloseButton, value: true }
+    - { name: HideTabNumber, value: false }
+    - { name: HighlightTabLabels, value: true }
+    - { name: JobName, value: false }
+    - { name: OnlyWhenMoreTabs, value: true }
+    - { name: OpenArrangementAtStartup, value: false }
+    - { name: OpenBookmark, value: false }
+    - { name: PassOnControlClick, value: false }
+    - { name: PasteFromClipboard, value: false }
+    - { name: QuitWhenAllWindowsClosed, value: true }
+    - { name: PromptOnQuit, value: true }
+    - { name: SavePasteHistory, value: false }
+    - { name: ShowBookmarkName, value: true }
+    - { name: ShowNewOutputIndicator, value: true }
+    - { name: SUEnableAutomaticChecks, value: false }
+    - { name: SUSendProfileInfo, value: false }
+    - { name: ThreeFingerEmulates, value: false }
+    - { name: WindowNumber, value: true }
+
+- name: iTerm (ints)
+  osx_defaults:
+    domain: com.googlecode.iterm2
+    key: '{{ item.name }}'
+    type: int
+    value: '{{ item.value }}'
+  loop:
+    - { name: AppleAntiAliasingThreshold, value: 1 }
+    - { name: AppleScrollAnimationEnabled, value: 0 }
+    - { name: AppleSmoothFixedFontsSizeThreshold, value: 1 }
+    - { name: Control, value: 1 }
+    - { name: OpenTmuxWindowsIn, value: 0 }
+    - { name: WindowStyle, value: 0 }
+
+- name: iTerm (hotkeys)
+  osx_defaults:
+    domain: com.googlecode.iterm2
+    key: '{{ item.name }}'
+    type: '{{ item.type }}'
+    value: '{{ item.value }}'
+  loop:
+    - { name: HotKeyTogglesWindow, type: bool, value: false }
+    - { name: Hotkey, type: bool, value: true }
+    - { name: HotkeyMigratedFromSingleToMulti, type: bool, value: true }
+    - { name: HotkeyChar, type: int, value: 32 }
+    - { name: HotkeyCode, type: int, value: 49 }
+    - { name: HotkeyModifiers, type: int, value: 524288 }
