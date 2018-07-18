@@ -74,8 +74,13 @@
     - { name: ShowNewOutputIndicator, value: true }
     - { name: SUEnableAutomaticChecks, value: false }
     - { name: SUSendProfileInfo, value: false }
+    - { name: SUHasLaunchedBefore, value: true }
     - { name: ThreeFingerEmulates, value: false }
     - { name: WindowNumber, value: true }
+    - { name: NoSyncHaveWarnedAboutPasteConfirmationChange, value: true }
+    - { name: NoSyncSuppressBroadcastInputWarning, value: true }
+    - { name: NSScrollAnimationEnabled, value: false }
+    - { name: NSScrollViewShouldScrollUnderTitlebar, value: false }
 
 - name: iTerm (ints)
   osx_defaults:
@@ -90,6 +95,7 @@
     - { name: Control, value: 1 }
     - { name: OpenTmuxWindowsIn, value: 0 }
     - { name: WindowStyle, value: 0 }
+    - { name: NoSyncSuppressBroadcastInputWarning_selection, value: 0 }
 
 - name: iTerm (hotkeys)
   osx_defaults:
