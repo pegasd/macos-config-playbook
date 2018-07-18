@@ -1,5 +1,12 @@
-# iTerm settings
-
+---
+#
+# iTerm Profile
+#
+# Managed through a Dynamic Profile with a pre-set Guid
+# That Guid is later used as 'Default Bookmark Guid'.
+#
+# Read more at https://www.iterm2.com/documentation-dynamic-profiles.html
+#
 - name: iTerm (profile directory)
   file:
     path: '~/Library/Application Support/iTerm2/DynamicProfiles'
@@ -10,6 +17,9 @@
     dest: '~/Library/Application Support/iTerm2/DynamicProfiles/iterm_profile.json'
     src: 'iterm_profile.json'
 
+#
+# iTerm osx_defaults config
+#
 - name: iTerm (theme)
   osx_defaults:
     domain: com.googlecode.iterm2
@@ -30,7 +40,21 @@
     - { name: 'NSWindow Frame SharedPreferences', type: string, value: '113 418 918 452 0 0 1440 877' }
     - { name: 'Default Bookmark Guid', type: string, value: '1928FBA6-572C-4073-8398-1456E62B5E0A' }
 
-- name: iTerm (bools)
+- name: iTerm (hotkeys)
+  osx_defaults:
+    domain: com.googlecode.iterm2
+    key: '{{ item.name }}'
+    type: '{{ item.type }}'
+    value: '{{ item.value }}'
+  loop:
+    - { name: HotKeyTogglesWindow, type: bool, value: false }
+    - { name: Hotkey, type: bool, value: true }
+    - { name: HotkeyMigratedFromSingleToMulti, type: bool, value: true }
+    - { name: HotkeyChar, type: int, value: 32 }
+    - { name: HotkeyCode, type: int, value: 49 }
+    - { name: HotkeyModifiers, type: int, value: 524288 }
+
+- name: iTerm (bools dump)
   osx_defaults:
     domain: com.googlecode.iterm2
     key: '{{ item.name }}'
@@ -62,27 +86,27 @@
     - { name: HideTabNumber, value: false }
     - { name: HighlightTabLabels, value: true }
     - { name: JobName, value: false }
+    - { name: NSScrollAnimationEnabled, value: false }
+    - { name: NSScrollViewShouldScrollUnderTitlebar, value: false }
+    - { name: NoSyncHaveWarnedAboutPasteConfirmationChange, value: true }
+    - { name: NoSyncSuppressBroadcastInputWarning, value: true }
     - { name: OnlyWhenMoreTabs, value: true }
     - { name: OpenArrangementAtStartup, value: false }
     - { name: OpenBookmark, value: false }
     - { name: PassOnControlClick, value: false }
     - { name: PasteFromClipboard, value: false }
-    - { name: QuitWhenAllWindowsClosed, value: true }
     - { name: PromptOnQuit, value: true }
+    - { name: QuitWhenAllWindowsClosed, value: true }
+    - { name: SUEnableAutomaticChecks, value: false }
+    - { name: SUHasLaunchedBefore, value: true }
+    - { name: SUSendProfileInfo, value: false }
     - { name: SavePasteHistory, value: false }
     - { name: ShowBookmarkName, value: true }
     - { name: ShowNewOutputIndicator, value: true }
-    - { name: SUEnableAutomaticChecks, value: false }
-    - { name: SUSendProfileInfo, value: false }
-    - { name: SUHasLaunchedBefore, value: true }
     - { name: ThreeFingerEmulates, value: false }
     - { name: WindowNumber, value: true }
-    - { name: NoSyncHaveWarnedAboutPasteConfirmationChange, value: true }
-    - { name: NoSyncSuppressBroadcastInputWarning, value: true }
-    - { name: NSScrollAnimationEnabled, value: false }
-    - { name: NSScrollViewShouldScrollUnderTitlebar, value: false }
 
-- name: iTerm (ints)
+- name: iTerm (ints dump)
   osx_defaults:
     domain: com.googlecode.iterm2
     key: '{{ item.name }}'
@@ -93,20 +117,6 @@
     - { name: AppleScrollAnimationEnabled, value: 0 }
     - { name: AppleSmoothFixedFontsSizeThreshold, value: 1 }
     - { name: Control, value: 1 }
+    - { name: NoSyncSuppressBroadcastInputWarning_selection, value: 0 }
     - { name: OpenTmuxWindowsIn, value: 0 }
     - { name: WindowStyle, value: 0 }
-    - { name: NoSyncSuppressBroadcastInputWarning_selection, value: 0 }
-
-- name: iTerm (hotkeys)
-  osx_defaults:
-    domain: com.googlecode.iterm2
-    key: '{{ item.name }}'
-    type: '{{ item.type }}'
-    value: '{{ item.value }}'
-  loop:
-    - { name: HotKeyTogglesWindow, type: bool, value: false }
-    - { name: Hotkey, type: bool, value: true }
-    - { name: HotkeyMigratedFromSingleToMulti, type: bool, value: true }
-    - { name: HotkeyChar, type: int, value: 32 }
-    - { name: HotkeyCode, type: int, value: 49 }
-    - { name: HotkeyModifiers, type: int, value: 524288 }
