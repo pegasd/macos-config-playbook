@@ -10,6 +10,8 @@ You'll probably need at least the following:
 
 ```bash
 xcode-select --install
+# This might only be needed on Mojave
+open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
 ```
 
 - homebrew
