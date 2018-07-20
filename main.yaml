@@ -3,7 +3,7 @@
   hosts: localhost
   vars:
     update_dotfiles: true
-    dotfiles_repo: pegasd/dotfiles
+    dotfiles_repo: https://github.com/pegasd/dotfiles
     brew_present_packages:
       - awscli
       - byobu
@@ -40,9 +40,9 @@
     update_vim_plugins: false
     vim_plugins:
       - name: syntastic
-        repo: vim-syntastic/syntastic
+        repo: https://github.com/vim-syntastic/syntastic
       - name: tabular
-        repo: godlygeek/tabular
+        repo: https://github.com/godlygeek/tabular
   tasks:
     - include: tasks/osx_defaults.yaml
       tags: [ osx_defaults ]

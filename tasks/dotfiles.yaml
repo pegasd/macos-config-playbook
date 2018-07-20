@@ -2,7 +2,7 @@
 - name: Bring over my dotfiles
   git:
     dest: '~/.dotfiles'
-    repo: 'https://github.com/{{ dotfiles_repo }}'
+    repo: '{{ dotfiles_repo }}'
     update: '{{ update_dotfiles }}'
     force: '{{ update_dotfiles }}'
 
@@ -18,7 +18,7 @@
 - name: Vim plugins
   git:
     dest: '~/.vim/bundle/{{ item.name }}'
-    repo: 'https://github.com/{{ item.repo }}'
+    repo: '{{ item.repo }}'
     update: '{{ update_vim_plugins }}'
     force: '{{ update_vim_plugins }}'
   loop: '{{ vim_plugins }}'
