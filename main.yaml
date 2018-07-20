@@ -4,9 +4,9 @@
   vars:
     update_dotfiles: true
     dotfiles_repo: pegasd/dotfiles
-    brew_packages:
+    brew_present_packages:
+      - byobu
       - colordiff
-      - multitail
       - pwgen
       - pssh
       - vim
@@ -17,6 +17,8 @@
       - python
       - kubectl
       - most
+    brew_absent_packages:
+      - multitail
     brew_present_casks:
       - vlc
       - intellij-idea

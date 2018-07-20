@@ -2,11 +2,17 @@
 #
 # Packages
 #
-- name: Regular brew packages
+- name: Brew absent packages
+  homebrew:
+    name: '{{ item }}'
+    state: absent
+  loop: '{{ brew_absent_packages }}'
+
+- name: Brew present packages
   homebrew:
     name: '{{ item }}'
     state: present
-  loop: '{{ brew_packages }}'
+  loop: '{{ brew_present_packages }}'
 
 #
 # Casks
