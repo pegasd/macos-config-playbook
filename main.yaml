@@ -5,7 +5,9 @@
     update_dotfiles: true
     dotfiles_repo: pegasd/dotfiles
     brew_present_packages:
+      - awscli
       - byobu
+      - htop
       - colordiff
       - pwgen
       - pssh
