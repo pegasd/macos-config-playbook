@@ -37,7 +37,6 @@
     - { name: TabViewType, type: int, value: 2 }
     - { name: LeftOption, type: int, value: 2 }
     - { name: LeftTabBarWidth, type: int, value: 50 }
-    - { name: 'NSWindow Frame SharedPreferences', type: string, value: '113 418 918 452 0 0 1440 877' }
     - { name: 'Default Bookmark Guid', type: string, value: '1928FBA6-572C-4073-8398-1456E62B5E0A' }
 
 - name: iTerm (hotkeys)
