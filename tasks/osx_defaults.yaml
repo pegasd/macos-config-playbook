@@ -1,5 +1,7 @@
 ---
+#
 # Security
+#
 - name: Disable Password Hints at Login
   osx_defaults: domain=com.apple.loginwindow key=RetriesUntilHint type=int value=0
 
@@ -11,7 +13,9 @@
   osx_defaults: domain=com.apple.dock key={{ item.name }} type=int value={{ item.value }}
   loop: [{ name: wvous-tl-corner, value: 5 }, { name: wvous-tl-modifier, value: 0 }]
 
+#
 # Usability
+#
 - name: Do NOT use smart quotes and dashes
   osx_defaults: key={{ item }} type=bool value=false
   loop: [ NSAutomaticDashSubstitutionEnabled, NSAutomaticQuoteSubstitutionEnabled ]
@@ -40,72 +44,63 @@
     - { name: closeViewZoomFollowsFocus, type: bool, value: false }
     - { name: speakItemUnderMouseAfterDelayMode, type: int, value: 0 }
 
+#
 # Color theme
-- name: Dark Mode ON
-  osx_defaults: key=AppleInterfaceStyle value=Dark
-
-- name: Green Highlight Color
-  osx_defaults: key=AppleHighlightColor value='0.752941 0.964706 0.678431 Green'
-
-- name: Color Variant
-  osx_defaults: key=AppleAquaColorVariant type=int value=6
+#
+- name: Color Theme
+  osx_defaults:
+    key: '{{ item.name }}'
+    type: '{{ item.type }}'
+    value: '{{ item.value }}'
+  loop:
+    - { name: AppleInterfaceStyle, type: string,  value: Dark }
+    - { name: AppleHighlightColor, type: string, value: '0.752941 0.964706 0.678431 Green' }
+    - { name: AppleAquaColorVariant, type: int, value: 6 }
 
 # Siri
-- name: Disable Ask Siri
-  osx_defaults: domain=com.apple.assistant.support key='Assistant Enabled' type=bool value=false
-
-- name: Disable Siri menubar icon
-  osx_defaults: domain=com.apple.Siri key=StatusMenuVisible type=bool value=false
+- name: Siri
+  osx_defaults:
+    domain: com.apple.assistant.support
+    key: '{{ item.name }}'
+    type: bool
+    value: '{{ item.value }}'
+  loop:
+    - { name: 'Assistant Enabled', value: false }
+    - { name: StatusMenuVisible, value: false }
 
 # Screenshots
 - name: Screenshot format
   osx_defaults: domain=com.apple.screencapture key=type value=png
 
 # Dock
-- name: Dock tile size
-  osx_defaults: domain=com.apple.dock key=tilesize type=float value=35
-
-- name: Dock magnified tile size
-  osx_defaults: domain=com.apple.dock key=largesize type=float value=66
-
-- name: Tile magnification on
-  osx_defaults: domain=com.apple.dock key=magnification type=bool value=true
-
-- name: Dock minimize effect
-  osx_defaults: domain=com.apple.dock key=mineffect value=genie
-
-- name: Auto-hide dock
-  osx_defaults: domain=com.apple.dock key=autohide type=bool value=true
-
-- name: Remove all icons from dock
-  osx_defaults: { domain: com.apple.dock, key: persistent-apps, type: array, value: [] }
-
-- name: Dock location
-  osx_defaults: domain=com.apple.dock key=orientation value=right
+- name: VLC settings
+  osx_defaults:
+    domain: com.apple.dock
+    key: '{{ item.name }}'
+    type: '{{ item.type }}'
+    value: '{{ item.value }}'
+  loop:
+    - { name: tilesize, type: float, value: 35 }
+    - { name: largesize, type: float, value: 66 }
+    - { name: magnification, type: bool, value: true }
+    - { name: mineffect, type: string, value: genie }
+    - { name: autohide, type: bool, value: true }
+    - { name: orientation, type: string, value: right }
+    - { name: persistent-apps, type: array, value: [] }
 
 # VLC
-- name: VLC has launched before
-  osx_defaults: domain=org.videolan.vlc key=SUHasLaunchedBefore type=bool value=true
-
-- name: Disable VLC updates
-  osx_defaults: domain=org.videolan.vlc key=SUEnableAutomaticChecks type=bool value=false
-
-- name: VLC American English
+- name: VLC settings
   osx_defaults:
     domain: org.videolan.vlc
     key: '{{ item.name }}'
     type: '{{ item.type }}'
     value: '{{ item.value }}'
   loop:
-    - name: AppleTextDirection
-      type: bool
-      value: false
-    - name: NSForceRightToLeftWritingDirection
-      type: bool
-      value: false
-    - name: language
-      type: string
-      value: en
+    - { name: AppleTextDirection, type: bool, value: false }
+    - { name: NSForceRightToLeftWritingDirection, type: bool, value: false }
+    - { name: language, type: string, value: en }
+    - { name: SUEnableAutomaticChecks, type: bool, value: false }
+    - { name: SUHasLaunchedBefore, type: bool, value: true }
 
 # Transmission
 - name: Transmission settings
