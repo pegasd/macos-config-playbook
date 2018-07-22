@@ -11,7 +11,7 @@
     src: '~/.dotfiles/'
     dest: '~'
     archive: false
-    recurse: true
+    recursive: true
     rsync_opts:
       - '--exclude=.git'
       - '--exclude=LICENSE'
