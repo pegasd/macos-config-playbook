@@ -24,7 +24,7 @@ script:
 
   # Test the playbook's idempotence.
   - idempotence=$(mktemp)
-  - "ansible-playbook main.yaml -vv | tee -a ${idempotence}"
+  - "ansible-playbook main.yaml -vvv | tee -a ${idempotence}"
   - >
     tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
