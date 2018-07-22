@@ -73,7 +73,7 @@
   osx_defaults: domain=com.apple.screencapture key=type value=png
 
 # Dock
-- name: VLC settings
+- name: Dock settings
   osx_defaults:
     domain: com.apple.dock
     key: '{{ item.name }}'
