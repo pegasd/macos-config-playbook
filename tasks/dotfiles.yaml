@@ -10,7 +10,8 @@
   synchronize:
     src: '~/.dotfiles/'
     dest: '~'
-    perms: false
+    archive: false
+    recurse: true
     rsync_opts:
       - '--exclude=.git'
       - '--exclude=LICENSE'
