@@ -12,6 +12,9 @@
     dest: '~'
     archive: false
     recursive: true
+    perms: true
+    links: true
+    times: false
     rsync_opts:
       - '--exclude=.git'
       - '--exclude=LICENSE'
