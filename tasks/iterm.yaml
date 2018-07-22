@@ -88,6 +88,7 @@
     - { name: NSScrollAnimationEnabled, value: false }
     - { name: NSScrollViewShouldScrollUnderTitlebar, value: false }
     - { name: NoSyncHaveWarnedAboutPasteConfirmationChange, value: true }
+    - { name: NoSyncPermissionToShowTip, value: false }
     - { name: NoSyncSuppressBroadcastInputWarning, value: true }
     - { name: OnlyWhenMoreTabs, value: true }
     - { name: OpenArrangementAtStartup, value: false }
