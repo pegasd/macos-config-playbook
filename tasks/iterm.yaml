@@ -38,6 +38,8 @@
     - { name: LeftOption, type: int, value: 2 }
     - { name: LeftTabBarWidth, type: int, value: 50 }
     - { name: 'Default Bookmark Guid', type: string, value: '1928FBA6-572C-4073-8398-1456E62B5E0A' }
+    - { name: NeverWarnAboutShortLivedSessions_1928FBA6-572C-4073-8398-1456E62B5E0A, type: bool, value: true }
+    - { name: NeverWarnAboutShortLivedSessions_1928FBA6-572C-4073-8398-1456E62B5E0A_selection, type: int, value: 0 }
 
 - name: iTerm (hotkeys)
   osx_defaults:
