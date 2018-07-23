@@ -15,6 +15,9 @@ install:
   - sudo touch /etc/ansible/hosts
   - "echo -e '[local]\nlocalhost ansible_connection=local' | sudo tee -a /etc/ansible/hosts > /dev/null"
 
+  # Update Homebrew
+  - brew update
+
 script:
   # Check the role/playbook's syntax.
   - "ansible-playbook main.yaml --syntax-check"
