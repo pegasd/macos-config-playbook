@@ -13,8 +13,8 @@
     archive: false
     recursive: true
     perms: true
-    links: true
-    times: false
+    links: false
+    times: true
     rsync_opts:
       - '--exclude=.git'
       - '--exclude=LICENSE'
