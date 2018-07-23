@@ -1,5 +1,7 @@
 # macos-config-playbook
 
+[![Build Status](https://travis-ci.org/pegasd/macos-config-playbook.svg?branch=master)](https://travis-ci.org/pegasd/macos-config-playbook)
+
 ## Installation
 
 > I haven't tested a clean install of this yet.
