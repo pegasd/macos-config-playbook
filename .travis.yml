@@ -1,6 +1,7 @@
 ---
 sudo: required
 os: osx
+language: generic
 osx_image: xcode9.4 # macOS 10.13
 
 install:
@@ -23,7 +24,7 @@ script:
   - "ansible-playbook main.yaml --syntax-check"
 
   # Test the playbook.
-  - "travis_wait 30 ansible-playbook main.yaml"
+  - "travis_wait 30 ansible-playbook -vv main.yaml"
 
   # Test the playbook's idempotence.
   - idempotence=$(mktemp)
