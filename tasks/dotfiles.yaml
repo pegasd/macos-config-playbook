@@ -1,4 +1,25 @@
 ---
+- name: history directory
+  file:
+    path: ~/.history
+    state: directory
+    mode: 0700
+
+- when: vim_plugins
+  block:
+    - name: Vim plugins directory
+      file:
+        path: ~/.vim/bundle
+        state: directory
+        mode: 0700
+    - name: Vim plugins
+      git:
+        dest: '~/.vim/bundle/{{ item.name }}'
+        repo: '{{ item.repo }}'
+        update: '{{ update_vim_plugins }}'
+        force: '{{ update_vim_plugins }}'
+      loop: '{{ vim_plugins }}'
+
 - name: Bring over my dotfiles
   git:
     dest: '~/.dotfiles'
@@ -13,23 +34,9 @@
     archive: false
     recursive: true
     perms: true
-    links: false
+    links: true
     times: true
     rsync_opts:
       - '--exclude=.git'
       - '--exclude=LICENSE'
       - '--exclude=*.md'
-
-- name: Vim plugins
-  git:
-    dest: '~/.vim/bundle/{{ item.name }}'
-    repo: '{{ item.repo }}'
-    update: '{{ update_vim_plugins }}'
-    force: '{{ update_vim_plugins }}'
-  loop: '{{ vim_plugins }}'
-
-- name: history directory
-  file:
-    path: ~/.history
-    state: directory
-    mode: 0700
