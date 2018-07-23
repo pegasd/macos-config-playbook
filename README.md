@@ -32,7 +32,7 @@ brew install ansible
 To run the playbook:
 
 ```bash
-ansible main.yaml
+ansible-playbook main.yaml
 ```
 
 ### dotfiles
@@ -43,7 +43,12 @@ This is configured to install and update the [following dotfiles repository](htt
 
 Most of the `defaults` configuration is done through `tasks/osx_defaults.yaml`.
 
-Unfortunately, Ansible is lacking `dict` and `dict-add` support (despite a well done [PR](https://github.com/ansible/ansible/issues/24028)) in its `osx_defaults` module, so there are a couple of scripts that can be ran manually.
+Unfortunately, Ansible is lacking `dict` and `dict-add` support (despite a well done [PR](https://github.com/ansible/ansible/issues/24028)) in its `osx_defaults` module, so there are a couple of scripts that can be ran manually:
+
+```bash
+files/other_defaults
+files/spotlight
+```
 
 **files/other_defaults**
 
