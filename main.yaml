@@ -37,6 +37,8 @@
       - docker
     brew_absent_casks:
       - jetbrains-toolbox
+    fonts:
+      - font-ubuntumono-nerd-font-mono
     update_vim_plugins: false
     vim_plugins:
       - name: syntastic
@@ -52,4 +54,6 @@
       tags: [ applications ]
     - include: tasks/dotfiles.yaml
       tags: [ applications, dotfiles ]
+    - include: tasks/fonts.yaml
+      tags: [ fonts ]
 ...

@@ -1,0 +1,12 @@
+---
+- name: Homebrew Fonts cask tap
+  homebrew_tap:
+    name: homebrew/cask-fonts
+    state: present
+
+- name: Fonts
+  homebrew_cask:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ fonts }}'
+...
