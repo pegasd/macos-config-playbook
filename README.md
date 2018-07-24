@@ -57,14 +57,17 @@ files/spotlight
 
 **files/spotlight**
 
-Spotlight configuration removes all volumes but `/` from indexing configuration and re-builds index on `/`.
-
-I don't recommend running this often.
-
-This might be a Mojave Beta-only issue, but `defaults` read all values (inside an array of dicts) as strings
-(whether they were booleans, integers, or floats).
+- Spotlight configuration removes all volumes but `/` from indexing configuration and re-builds index on `/`.
+- I don't recommend running this often.
 
 ## Issues
+
+This might be a Mojave Beta-only issue, but `defaults write` treats all passed values as strings (whether they should be booleans,
+integers, or floats) in a construct like this:
+
+```bash
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "{ enabled = 1; value = { type = standard; parameters = ( 32, 49, 1048576 ); }; }"
+```
 
 ## Contributing
 
