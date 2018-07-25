@@ -13,8 +13,7 @@ install:
 
   # Add a hosts file.
   - sudo mkdir -p /etc/ansible
-  - sudo touch /etc/ansible/hosts
-  - "echo -e '[local]\nlocalhost ansible_connection=local' | sudo tee -a /etc/ansible/hosts > /dev/null"
+  - "{ echo -e '[local]'; echo 'local ansible_connection=local'; } > /etc/ansible/hosts"
 
   # Update Homebrew
   - brew update
