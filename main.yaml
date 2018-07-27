@@ -7,34 +7,35 @@
     brew_present_packages:
       - awscli
       - byobu
-      - htop
       - colordiff
-      - pwgen
-      - pssh
-      - vim
-      - mercurial
       - cvs
       - grep # GNU Grep is nice
+      - htop
       - jq
-      - python
       - kubectl
+      - kubernetes-cli
+      - mercurial
       - most
+      - pssh
+      - pwgen
+      - python
+      - vim
     brew_absent_packages:
       - multitail
     brew_present_casks:
-      - vlc
-      - intellij-idea
-      - slack
-      - transmission
-      - java
+      - 1password6
       - dash
+      - docker
       - google-chrome
+      - google-cloud-sdk
+      - intellij-idea
       - istat-menus
       - iterm2
-      - 1password6
-      - google-cloud-sdk
+      - java
       - pdk
-      - docker
+      - slack
+      - transmission
+      - vlc
     brew_absent_casks:
       - jetbrains-toolbox
     fonts:
