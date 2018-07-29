@@ -36,6 +36,7 @@
       - slack
       - transmission
       - vlc
+      - xee
     brew_absent_casks:
       - jetbrains-toolbox
     fonts:
