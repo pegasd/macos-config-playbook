@@ -1,22 +1,4 @@
 ---
-#
-# Packages
-#
-- name: Brew absent packages
-  homebrew:
-    name: '{{ item }}'
-    state: absent
-  loop: '{{ brew_absent_packages }}'
-
-- name: Brew present packages
-  homebrew:
-    name: '{{ item }}'
-    state: present
-  loop: '{{ brew_present_packages }}'
-
-#
-# Casks
-#
 - name: Homebrew cask tap
   homebrew_tap:
     name: homebrew/cask
@@ -38,13 +20,3 @@
     name: '{{ item }}'
     state: present
   loop: '{{ brew_present_casks }}'
-
-#
-# App Store
-#
-# TODO
-#
-# - Spark
-# - Magnet
-# - Telegram
-# - TweetDeck

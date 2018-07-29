@@ -2,8 +2,14 @@
 - name: Configure macOS
   hosts: localhost
   vars:
+    #
+    # dot files
+    #
     update_dotfiles: true
     dotfiles_repo: https://github.com/pegasd/dotfiles
+    #
+    # Homebrew Formulae
+    #
     brew_present_packages:
       - awscli
       - byobu
@@ -22,8 +28,10 @@
       - vim
     brew_absent_packages:
       - multitail
+    #
+    # Homebrew Casks
+    #
     brew_present_casks:
-      - 1password6
       - dash
       - docker
       - google-chrome
@@ -38,24 +46,54 @@
       - vlc
       - xee
     brew_absent_casks:
+      - 1password6
       - jetbrains-toolbox
+    #
+    # Mac App Store
+    #
+    mas_upgrade_all_apps: false
+    mas_signin_dialog: false
+    mas_installed_apps:
+      - { id: 1176895641, name: 'Spark (2.0.8)' }
+      - { id: 441258766, name: 'Magnet (2.2.2)' }
+      - { id: 747648890, name: 'Telegram (4.2.1)' }
+      - { id: 485812721, name: 'TweetDeck (3.9.889)' }
+      - { id: 443987910, name: '1Password (6.8.9)' }
+    #
+    # Fonts
+    #
     fonts:
       - font-ubuntumono-nerd-font-mono
+    #
+    # Vim
+    #
     update_vim_plugins: false
     vim_plugins:
       - name: syntastic
         repo: https://github.com/vim-syntastic/syntastic
       - name: tabular
         repo: https://github.com/godlygeek/tabular
+  vars_prompt:
+    #
+    # Mac App Store (Sign-In info)
+    #
+    - name: mas_email
+      prompt: Enter Mac App Store account e-mail
+      private: no
+    - name: mas_password
+      prompt: Enter Mac App Store account password
   tasks:
     - include: tasks/osx_defaults.yaml
       tags: [ osx_defaults ]
     - include: tasks/iterm.yaml
       tags: [ osx_defaults, iterm ]
-    - include: tasks/applications.yaml
-      tags: [ applications ]
+    - include: tasks/brew_casks.yaml
+      tags: [ applications, casks ]
+    - include: tasks/brew_formulae.yaml
+      tags: [ applications, brewform ]
+    - include: tasks/mas.yaml
+      tags: [ applications, mas, never ] # FIXME
     - include: tasks/dotfiles.yaml
       tags: [ applications, dotfiles ]
     - include: tasks/fonts.yaml
       tags: [ fonts ]
-...
