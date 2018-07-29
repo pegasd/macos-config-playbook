@@ -117,6 +117,7 @@
     - { name: InfoVisible, value: false }
     - { name: MagnetOpenAsk, value: false }
     - { name: WarningLegal, value: false }
+    - { name: WarningDonate, value: false }
 
 - name: Transmission settings [directories]
   osx_defaults:
