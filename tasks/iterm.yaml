@@ -30,11 +30,11 @@
     - { name: ShowFullScreenTabBar, type: bool, value: false }
     - { name: ShowPaneTitles, type: bool, value: true }
     - { name: SmartPlacement, type: bool, value: false }
-    - { name: StretchTabsToFillBar, type: bool, value: false }
+    - { name: StretchTabsToFillBar, type: bool, value: true }
     - { name: SwitchTabModifier, type: int, value: 4 }
     - { name: SwitchWindowModifier, type: int, value: 6 }
     - { name: TabStyle, type: int, value: 1 }
-    - { name: TabViewType, type: int, value: 2 }
+    - { name: TabViewType, type: int, value: 0 }
     - { name: LeftOption, type: int, value: 2 }
     - { name: LeftTabBarWidth, type: int, value: 50 }
     - { name: 'Default Bookmark Guid', type: string, value: '1928FBA6-572C-4073-8398-1456E62B5E0A' }
@@ -82,7 +82,7 @@
     - { name: HideActivityIndicator, value: false }
     - { name: HideMenuBarInFullscreen, value: true }
     - { name: HideScrollbar, value: true }
-    - { name: HideTab, value: false }
+    - { name: HideTab, value: true }
     - { name: HideTabCloseButton, value: true }
     - { name: HideTabNumber, value: false }
     - { name: HighlightTabLabels, value: true }
