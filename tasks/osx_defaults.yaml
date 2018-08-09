@@ -126,6 +126,16 @@
     value: /Volumes/storage/_downloads
   loop: [ AutoImportDirectory, NSNavLastRootDirectory, DownloadFolder ]
 
+#
+# Accessibility
+#
+- name: Reduce motion
+  osx_defaults:
+    domain: com.apple.universalaccess
+    key: reduceMotion
+    type: bool
+    value: true
+
 # TODO:
 # Language & Region
 # Software Update
