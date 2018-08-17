@@ -3,7 +3,7 @@
   hosts: localhost
   vars:
     update_dotfiles: true
-    dotfiles_repo: https://github.com/pegasd/dotfiles
+    dotfiles_repo: https://gitlab.com/the_pegas/dotfiles
     brew_present_packages:
       - awscli
       - byobu
