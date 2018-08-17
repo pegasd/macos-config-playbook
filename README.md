@@ -69,6 +69,8 @@ integers, or floats) in a construct like this:
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "{ enabled = 1; value = { type = standard; parameters = ( 32, 49, 1048576 ); }; }"
 ```
 
+so I have to pass all values in XML format.
+
 ## Contributing
 
 Feel free to submit issues, PRs, or just comment.
