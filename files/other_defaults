@@ -33,3 +33,10 @@ defaults write com.apple.screencapture location -string ~/Desktop/screenshots
 
 # Restart defaults server to apply settings
 killall cfprefsd
+
+###################
+#  Google Chrome  #
+###################
+
+defaults write com.apple.universalaccess com.apple.custommenu.apps -array com.google.Chrome
+defaults write com.google.Chrome NSUserKeyEquivalents -dict 'Select Next Tab' '@$]' 'Select Previous Tab' '@$['
