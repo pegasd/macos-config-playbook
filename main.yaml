@@ -19,6 +19,7 @@
       - pssh
       - pwgen
       - python
+      - travis
       - vim
     brew_absent_packages:
       - multitail
