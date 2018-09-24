@@ -57,7 +57,9 @@
     - { name: AppleHighlightColor, type: string, value: '0.752941 0.964706 0.678431 Green' }
     - { name: AppleAquaColorVariant, type: int, value: 6 }
 
+#
 # Siri
+#
 - name: Siri
   osx_defaults:
     domain: com.apple.assistant.support
@@ -68,11 +70,15 @@
     - { name: 'Assistant Enabled', value: false }
     - { name: StatusMenuVisible, value: false }
 
+#
 # Screenshots
+#
 - name: Screenshot format
   osx_defaults: domain=com.apple.screencapture key=type value=png
 
+#
 # Dock
+#
 - name: Dock settings
   osx_defaults:
     domain: com.apple.dock
@@ -88,7 +94,9 @@
     - { name: orientation, type: string, value: right }
     - { name: persistent-apps, type: array, value: [] }
 
+#
 # VLC
+#
 - name: VLC settings
   osx_defaults:
     domain: org.videolan.vlc
@@ -101,8 +109,11 @@
     - { name: language, type: string, value: en }
     - { name: SUEnableAutomaticChecks, type: bool, value: false }
     - { name: SUHasLaunchedBefore, type: bool, value: true }
+    - { name: 'NSStatusItem Visible statusBarItem', type: bool, value: false }
 
+#
 # Transmission
+#
 - name: Transmission settings
   osx_defaults:
     domain: org.m0k.transmission
@@ -123,7 +134,7 @@
   osx_defaults:
     domain: org.m0k.transmission
     key: '{{ item }}'
-    value: /Volumes/storage/_downloads
+    value: /_downloads
   loop: [ AutoImportDirectory, NSNavLastRootDirectory, DownloadFolder ]
 
 #
