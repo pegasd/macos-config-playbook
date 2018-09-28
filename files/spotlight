@@ -9,10 +9,6 @@ osascript -e 'tell application "System Preferences" to quit'
 #  Spotlight  #
 ###############
 
-# Disable Spotlight indexing for any volume that gets mounted and has not yet
-# been indexed before.
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-
 # Spotlight categories
 defaults write com.apple.spotlight orderedItems -array \
   '<dict> <key>enabled</key> <true/>  <key>name</key> <string>APPLICATIONS</string>               </dict>' \
@@ -36,6 +32,10 @@ defaults write com.apple.spotlight orderedItems -array \
   '<dict> <key>enabled</key> <false/> <key>name</key> <string>MENU_EXPRESSION</string>            </dict>' \
   '<dict> <key>enabled</key> <false/> <key>name</key> <string>MENU_SPOTLIGHT_SUGGESTIONS</string> </dict>' \
   '<dict> <key>enabled</key> <false/> <key>name</key> <string>MENU_OTHER</string>                 </dict>' \
+
+# Disable Spotlight indexing for any volume that gets mounted and has not yet
+# been indexed before.
+sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
 # Load new settings before rebuilding the index
 sudo killall mds > /dev/null 2>&1
