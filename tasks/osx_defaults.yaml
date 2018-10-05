@@ -91,7 +91,7 @@
     - { name: magnification, type: bool, value: true }
     - { name: mineffect, type: string, value: genie }
     - { name: autohide, type: bool, value: true }
-    - { name: orientation, type: string, value: right }
+    - { name: orientation, type: string, value: left }
     - { name: persistent-apps, type: array, value: [] }
 
 #
