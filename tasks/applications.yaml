@@ -25,7 +25,7 @@
 - name: PuppetLabs cask tap
   homebrew_tap:
     name: puppetlabs/puppet
-    state: present
+    state: absent
 
 - name: Brew absent casks
   homebrew_cask:
