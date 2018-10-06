@@ -20,6 +20,7 @@
       - pwgen
       - python
       - travis
+      - unrar
       - vim
     brew_absent_packages:
       - multitail
