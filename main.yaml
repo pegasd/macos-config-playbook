@@ -27,6 +27,7 @@
     brew_present_casks:
       - dash
       - docker
+      - drawio
       - firefox
       - google-chrome
       - google-cloud-sdk
