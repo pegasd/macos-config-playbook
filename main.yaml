@@ -8,6 +8,7 @@
       - awscli
       - byobu
       - colordiff
+      - cfssl
       - cvs
       - grep # GNU Grep is nice
       - htop
