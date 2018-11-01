@@ -26,6 +26,7 @@
     brew_absent_packages:
       - multitail
     brew_present_casks:
+      - 1password
       - dash
       - docker
       - drawio
