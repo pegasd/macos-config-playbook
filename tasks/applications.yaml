@@ -1,5 +1,19 @@
 ---
 #
+# Taps
+#
+- name: Brew absent taps
+  homebrew_tap:
+    name: '{{ item }}'
+    state: absent
+  loop: '{{ brew_absent_taps }}'
+- name: Brew present taps
+  homebrew_tap:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ brew_present_taps }}'
+
+#
 # Packages
 #
 - name: Brew absent packages
@@ -17,16 +31,6 @@
 #
 # Casks
 #
-- name: Homebrew cask tap
-  homebrew_tap:
-    name: homebrew/cask
-    state: present
-
-- name: PuppetLabs cask tap
-  homebrew_tap:
-    name: puppetlabs/puppet
-    state: absent
-
 - name: Brew absent casks
   homebrew_cask:
     name: '{{ item }}'

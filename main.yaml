@@ -4,6 +4,11 @@
   vars:
     update_dotfiles: true
     dotfiles_repo: https://gitlab.com/the_pegas/dotfiles
+    brew_present_taps:
+      - homebrew/cask
+      - homebrew/cask-versions
+    brew_absent_taps:
+      - puppetlabs/puppet
     brew_present_packages:
       - awscli
       - byobu
