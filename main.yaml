@@ -38,16 +38,16 @@
       - firefox
       - google-chrome
       - google-cloud-sdk
-      - intellij-idea
       - istat-menus
       - iterm2
       - java
+      - jetbrains-toolbox
       - skype
       - slack
       - transmission
       - vlc
     brew_absent_casks:
-      - jetbrains-toolbox
+      - intellij-idea
     fonts:
       - font-ubuntumono-nerd-font-mono
     update_vim_plugins: false
