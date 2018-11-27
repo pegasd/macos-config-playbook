@@ -26,10 +26,11 @@
       - pwgen
       - python
       - travis
-      - unrar
+      - unar
       - vim
     brew_absent_packages:
       - multitail
+      - unrar
     brew_present_casks:
       - 1password
       - dash
