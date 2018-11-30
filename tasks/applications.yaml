@@ -48,8 +48,10 @@
 #
 # TODO
 #
-# - 1Password # This needs to be the App Store version
-# - Spark
-# - Magnet
-# - Telegram
-# - TweetDeck
+#  No casks for these:
+#   - Spark
+#   - Magnet
+#   - TweetDeck
+#
+#  The cask needs VPN to work:
+#   - Telegram
