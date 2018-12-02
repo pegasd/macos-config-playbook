@@ -42,16 +42,4 @@
     name: '{{ item }}'
     state: present
   loop: '{{ brew_present_casks }}'
-
-#
-# App Store
-#
-# TODO
-#
-#  No casks for these:
-#   - Spark
-#   - Magnet
-#   - TweetDeck
-#
-#  The cask needs VPN to work:
-#   - Telegram
+...

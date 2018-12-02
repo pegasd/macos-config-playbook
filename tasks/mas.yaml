@@ -1,0 +1,20 @@
+---
+#
+# Mac App Store applications
+#
+- name: Ensure MAS is installed
+  homebrew:
+    name: mas
+    state: present
+
+- name: List installed MAS apps
+  command: mas list
+  register: mas_list
+  check_mode: no
+  changed_when: false
+
+- name: MAS present applications
+  command: mas install '{{ item.id }}'
+  with_items: '{{ mas_installed_apps }}'
+  when: 'item.id | string not in mas_list.stdout'
+...
