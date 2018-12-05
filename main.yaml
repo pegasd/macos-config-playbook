@@ -10,6 +10,7 @@
       - { name: Spark, id: 1176895641 }
       - { name: Telegram, id: 747648890 }
       - { name: Xcode, id: 497799835 }
+      - { name: Xee, id: 639764244 }
     brew_present_taps:
       - homebrew/cask
       - homebrew/cask-versions
