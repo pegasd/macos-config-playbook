@@ -14,8 +14,8 @@
     brew_present_taps:
       - homebrew/cask
       - homebrew/cask-versions
-    brew_absent_taps:
       - puppetlabs/puppet
+    brew_absent_taps: []
     brew_present_packages:
       - awscli
       - byobu
@@ -51,6 +51,7 @@
       - iterm2
       - java
       - openemu
+      - pdk
       - skype
       - slack
       - transmission
