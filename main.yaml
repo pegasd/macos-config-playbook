@@ -22,6 +22,7 @@
       - colordiff
       - cfssl
       - cvs
+      - gnupg
       - grep # GNU Grep is nice
       - htop
       - jq
@@ -29,6 +30,7 @@
       - kubernetes-cli
       - mercurial
       - most
+      - pinentry-mac
       - pssh
       - pwgen
       - python
