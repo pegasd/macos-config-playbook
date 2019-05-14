@@ -54,9 +54,11 @@
       - java
       - openemu
       - pdk
+      - puppet-agent
       - skype
       - slack
       - transmission
+      - visual-studio-code
       - vlc
     brew_absent_casks:
       - jetbrains-toolbox
