@@ -34,6 +34,7 @@
       - pssh
       - pwgen
       - python
+      - terraform
       - travis
       - unar
       - vim
