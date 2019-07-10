@@ -38,6 +38,7 @@
       - travis
       - unar
       - vim
+      - yq
     brew_absent_packages:
       - multitail
       - unrar
