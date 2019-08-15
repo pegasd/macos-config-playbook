@@ -22,6 +22,7 @@
       - colordiff
       - cfssl
       - cvs
+      - git-flow
       - gnupg
       - grep # GNU Grep is nice
       - htop
