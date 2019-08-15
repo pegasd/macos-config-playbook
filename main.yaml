@@ -30,7 +30,6 @@
       - kubectl
       - kubernetes-cli
       - mercurial
-      - most
       - pinentry-mac
       - pssh
       - pwgen
@@ -41,6 +40,7 @@
       - vim
       - yq
     brew_absent_packages:
+      - most
       - multitail
       - unrar
     brew_present_casks:
