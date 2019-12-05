@@ -23,8 +23,10 @@
       - cfssl
       - cvs
       - git-flow
+      - gitleaks
       - gnupg
-      - grep # GNU Grep is nice
+      - gnu-sed # GNU sed is nice
+      - grep # GNU grep is nice
       - htop
       - jq
       - kubectl
@@ -34,6 +36,7 @@
       - pssh
       - pwgen
       - python
+      - pylint
       - terraform
       - travis
       - unar
