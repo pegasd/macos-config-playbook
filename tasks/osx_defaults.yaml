@@ -31,6 +31,7 @@
   osx_defaults: key=NSAutomaticSpellingCorrectionEnabled type=bool value=false
 
 - name: Zoom
+  ignore_errors: yes
   osx_defaults:
     domain: com.apple.universalaccess
     key: '{{ item.name }}'
