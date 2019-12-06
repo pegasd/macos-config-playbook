@@ -5,8 +5,11 @@ language: generic
 osx_image: xcode11.2 # macOS 10.14
 
 install:
+  # Update Homebrew
+  - brew update
+
   # Install Ansible
-  - sudo pip install ansible
+  - brew install ansible
 
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
@@ -14,9 +17,6 @@ install:
   # Add a hosts file.
   - sudo mkdir -p /etc/ansible
   - "{ echo -e '[localhost]'; echo 'local ansible_connection=local'; } | sudo tee /etc/ansible/hosts"
-
-  # Update Homebrew
-  - brew update
 
 env:
   - ANSIBLE_SKIP='--skip-tags mas'
