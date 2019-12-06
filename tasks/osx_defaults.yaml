@@ -30,19 +30,20 @@
 - name: Disable auto-correct
   osx_defaults: key=NSAutomaticSpellingCorrectionEnabled type=bool value=false
 
-#- name: Zoom
-#  osx_defaults:
-#    domain: com.apple.universalaccess
-#    key: '{{ item.name }}'
-#    type: '{{ item.type }}'
-#    value: '{{ item.value }}'
-#  loop:
-#    - { name: closeViewScrollWheelToggle, type: bool, value: true }
-#    - { name: HIDScrollZoomModifierMask, type: int, value: 262144 }
-#    - { name: closeViewPanningMode, type: int, value: 0 }
-#    - { name: closeViewScrollWheelModifiersInt, type: int, value: 262144 }
-#    - { name: closeViewZoomFollowsFocus, type: bool, value: false }
-#    - { name: speakItemUnderMouseAfterDelayMode, type: int, value: 0 }
+- name: Zoom
+  osx_defaults:
+    domain: com.apple.universalaccess
+    key: '{{ item.name }}'
+    type: '{{ item.type }}'
+    value: '{{ item.value }}'
+  loop:
+    - { name: closeViewScrollWheelToggle, type: bool, value: true }
+    - { name: HIDScrollZoomModifierMask, type: int, value: 262144 }
+    - { name: closeViewPanningMode, type: int, value: 0 }
+    - { name: closeViewScrollWheelModifiersInt, type: int, value: 262144 }
+    - { name: closeViewZoomFollowsFocus, type: bool, value: false }
+    - { name: speakItemUnderMouseAfterDelayMode, type: int, value: 0 }
+  become: yes
 
 #
 # Color theme
@@ -140,12 +141,13 @@
 #
 # Accessibility
 #
-#- name: Reduce motion
-#  osx_defaults:
-#    domain: com.apple.universalaccess
-#    key: reduceMotion
-#    type: bool
-#    value: true
+- name: Reduce motion
+  osx_defaults:
+    domain: com.apple.universalaccess
+    key: reduceMotion
+    type: bool
+    value: true
+  become: yes
 
 # TODO:
 # Language & Region
