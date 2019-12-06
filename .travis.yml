@@ -13,15 +13,17 @@ install:
   - "{ echo -e '[localhost]'; echo 'local ansible_connection=local'; } | sudo tee /etc/ansible/hosts"
 
 script:
+  - ansible_flags='--skip-tags mas -vv'
+
   # Check the role/playbook's syntax.
   - "ansible-playbook main.yaml --syntax-check"
 
   # Test the playbook.
-  - "travis_wait 30 ansible-playbook -vv main.yaml"
+  - "travis_wait 30 ansible-playbook ${ansible_flags} main.yaml"
 
   # Test the playbook's idempotence.
   - idempotence=$(mktemp)
-  - "ansible-playbook main.yaml -vv | tee -a ${idempotence}"
+  - "ansible-playbook ${ansible_flags} main.yaml | tee -a ${idempotence}"
   - >
     tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
