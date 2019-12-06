@@ -5,12 +5,6 @@ language: generic
 osx_image: xcode11.2 # macOS 10.14
 
 install:
-  # Update Homebrew
-  - brew update
-
-  # Install Ansible
-  - brew install ansible
-
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
 
