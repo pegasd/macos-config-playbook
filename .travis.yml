@@ -18,18 +18,23 @@ install:
   # Update Homebrew
   - brew update
 
+env:
+  - ANSIBLE_SKIP='--skip-tags mas'
+  - ANSIBLE_PLAYBOOK=main.yaml
+  - ANSIBLE_COMMAND="ansible-playbook -vv ${ANSIBLE_SKIP} {ANSIBLE_PLAYBOOK}"
+
 script:
   # Check the role/playbook's syntax.
-  - "ansible-playbook main.yaml --syntax-check"
+  - "ansible-playbook ${ANSIBLE_PLAYBOOK} --syntax-check"
 
   # Test the playbook.
-  - "travis_wait 30 ansible-playbook -vv main.yaml"
+  - "travis_wait 30 ${ANSIBLE_COMMAND}
 
   # Test the playbook's idempotence.
-  - idempotence=$(mktemp)
-  - "ansible-playbook main.yaml -vv | tee -a ${idempotence}"
+  - idempotence_test_log=$(mktemp)
+  - "${ANSIBLE_COMMAND} | tee -a ${idempotence_test_log}"
   - >
-    tail ${idempotence}
+    tail ${idempotence_test_log}
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
