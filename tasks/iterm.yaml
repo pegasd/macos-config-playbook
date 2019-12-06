@@ -123,3 +123,4 @@
     - { name: NoSyncSuppressBroadcastInputWarning_selection, value: 0 }
     - { name: OpenTmuxWindowsIn, value: 0 }
     - { name: WindowStyle, value: 0 }
+...

@@ -140,12 +140,12 @@
 #
 # Accessibility
 #
-- name: Reduce motion
-  osx_defaults:
-    domain: com.apple.universalaccess
-    key: reduceMotion
-    type: bool
-    value: true
+#- name: Reduce motion
+#  osx_defaults:
+#    domain: com.apple.universalaccess
+#    key: reduceMotion
+#    type: bool
+#    value: true
 
 # TODO:
 # Language & Region
@@ -159,3 +159,4 @@
 # Keyboard
 #  - Caps Lock -> Control
 #  - Control -> Escape
+...

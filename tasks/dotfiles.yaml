@@ -40,3 +40,4 @@
       - '--exclude=.git'
       - '--exclude=LICENSE'
       - '--exclude=*.md'
+...
