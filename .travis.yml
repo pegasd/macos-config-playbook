@@ -5,11 +5,8 @@ language: generic
 osx_image: xcode11.2 # macOS 10.14
 
 install:
-  # Update Homebrew
-  - brew update
-
   # Install Ansible
-  - brew install ansible
+  - sudo pip install ansible
 
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
@@ -18,19 +15,21 @@ install:
   - sudo mkdir -p /etc/ansible
   - "{ echo -e '[localhost]'; echo 'local ansible_connection=local'; } | sudo tee /etc/ansible/hosts"
 
+  # Update Homebrew
+  - brew update
+
 script:
-  - ansible_command='ansible-playbook -vv --skip-tags mas main.yaml'
   # Check the role/playbook's syntax.
   - "ansible-playbook main.yaml --syntax-check"
 
   # Test the playbook.
-  - "travis_wait 30 ${ansible_command}
+  - "travis_wait 30 ansible-playbook -vv main.yaml"
 
   # Test the playbook's idempotence.
-  - idempotence_test_log=$(mktemp)
-  - "${ansible_command} | tee -a ${idempotence_test_log}"
+  - idempotence=$(mktemp)
+  - "ansible-playbook main.yaml -vv | tee -a ${idempotence}"
   - >
-    tail ${idempotence_test_log}
+    tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
