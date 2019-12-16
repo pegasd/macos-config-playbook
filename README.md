@@ -10,8 +10,6 @@ Pre-requisites:
 
 ```bash
 xcode-select --install
-# This might only be needed on Mojave
-open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
 ```
 
 - homebrew
@@ -25,6 +23,13 @@ open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10
 
 ```bash
 brew install ansible
+```
+
+- sudoers with `NOPASSWD: ALL` (some of the tasks require `become: yes` and will fail if sudo asks for a password).
+
+```diff
+- %admin  ALL = (ALL) ALL
++ %admin  ALL = (ALL) NOPASSWD: ALL
 ```
 
 ## Running
