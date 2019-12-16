@@ -21,8 +21,6 @@
       - byobu
       - colordiff
       - cfssl
-      - cvs
-      - git-flow
       - gitleaks
       - gnupg
       - gnu-sed # GNU sed is nice
@@ -43,6 +41,8 @@
       - vim
       - yq
     brew_absent_packages:
+      - cvs
+      - git-flow
       - most
       - multitail
       - unrar
@@ -61,13 +61,13 @@
       - openemu
       - pdk
       - puppet-agent
-      - skype
       - slack
       - transmission
-      - visual-studio-code
       - vlc
     brew_absent_casks:
+      - skype
       - jetbrains-toolbox
+      - visual-studio-code
     fonts:
       - font-ubuntumono-nerd-font-mono
     update_vim_plugins: false
