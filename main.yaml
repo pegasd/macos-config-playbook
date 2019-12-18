@@ -48,6 +48,7 @@
       - unrar
     brew_present_casks:
       - 1password
+      - bettertouchtool
       - dash
       - docker
       - drawio
