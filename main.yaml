@@ -6,7 +6,6 @@
     update_dotfiles: true
     dotfiles_repo: https://gitlab.com/the_pegas/dotfiles
     mas_installed_apps:
-      - { name: Magnet, id: 441258766 }
       - { name: Spark, id: 1176895641 }
       - { name: Telegram, id: 747648890 }
       # - { name: Xcode, id: 497799835 } # I don't need this everywhere
