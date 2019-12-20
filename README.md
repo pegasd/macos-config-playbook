@@ -15,7 +15,7 @@ xcode-select --install
 - homebrew
 
 ```bash
-# Looks scary, but seems to do the trick
+# Looks scary, but does the job
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
