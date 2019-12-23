@@ -135,7 +135,7 @@
   osx_defaults:
     domain: org.m0k.transmission
     key: '{{ item }}'
-    value: /_downloads
+    value: '{{ ansible_env.HOME }}/Downloads'
   loop: [ AutoImportDirectory, NSNavLastRootDirectory, DownloadFolder ]
 
 #
