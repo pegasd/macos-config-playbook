@@ -32,13 +32,16 @@
       - pinentry-mac
       - pssh
       - pwgen
-      - python
       - pylint
       - terraform
       - travis
       - unar
       - vim
       - yq
+      # Various Python niceties
+      - python
+      - pyenv
+      - pipenv
     brew_absent_packages:
       - cvs
       - git-flow
