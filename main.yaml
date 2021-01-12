@@ -33,7 +33,7 @@
       - pssh
       - pwgen
       - pylint
-      - terraform
+      - tfenv
       - travis
       - unar
       - vim
@@ -52,6 +52,7 @@
       - 1password
       - bettertouchtool
       - dash
+      - discord
       - docker
       - drawio
       - firefox
@@ -65,6 +66,7 @@
       - pdk
       - puppet-agent
       - slack
+      - spotify
       - transmission
       - vlc
     brew_absent_casks:
