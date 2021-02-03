@@ -70,6 +70,7 @@
       - transmission
       - vlc
     brew_absent_casks:
+      - terraform
       - skype
       - jetbrains-toolbox
       - visual-studio-code
