@@ -65,13 +65,13 @@
       - openemu
       - pdk
       - puppet-agent
+      - skype
       - slack
       - spotify
       - transmission
       - vlc
     brew_absent_casks:
       - terraform
-      - skype
       - jetbrains-toolbox
       - visual-studio-code
     fonts:
