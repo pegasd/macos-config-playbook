@@ -5,6 +5,12 @@
     state: directory
     mode: 0700
 
+- name: gnupg directory
+  file:
+    path: ~/.gnupg
+    state: directory
+    mode: 0700
+
 - when: vim_plugins
   block:
     - name: Vim plugins directory

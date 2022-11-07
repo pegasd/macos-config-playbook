@@ -16,63 +16,29 @@
       - puppetlabs/puppet
     brew_absent_taps: []
     brew_present_packages:
-      - awscli
-      - byobu
-      - colordiff
-      - cfssl
-      - gitleaks
-      - gnupg
       - gnu-sed # GNU sed is nice
       - grep # GNU grep is nice
       - htop
       - jq
-      - kubectl
-      - kubernetes-cli
-      - mercurial
+      - gnupg
       - pinentry-mac
       - pssh
-      - pwgen
-      - pylint
       - tfenv
-      - travis
       - unar
-      - vim
-      - yq
-      # Various Python niceties
-      - python
-      - pyenv
-      - pipenv
-    brew_absent_packages:
-      - cvs
-      - git-flow
-      - most
-      - multitail
-      - unrar
+    brew_absent_packages: []
     brew_present_casks:
-      - 1password
+      - 1password7
       - bettertouchtool
       - dash
-      - discord
       - docker
-      - drawio
-      - firefox
       - google-chrome
       - google-cloud-sdk
       - intellij-idea
       - istat-menus
       - iterm2
-      - java
-      - openemu
-      - pdk
-      - puppet-agent
-      - skype
       - slack
-      - transmission
       - vlc
-    brew_absent_casks:
-      - terraform
-      - jetbrains-toolbox
-      - visual-studio-code
+    brew_absent_casks: []
     fonts:
       - font-ubuntumono-nerd-font-mono
     update_vim_plugins: false

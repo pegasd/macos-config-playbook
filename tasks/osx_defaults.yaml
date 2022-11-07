@@ -24,7 +24,7 @@
   osx_defaults: key=AppleKeyboardUIMode type=int value=0
 
 - name: Keyboard repeat rate
-  osx_defaults: key={{ item.name }} type=int value={{ item.value }}
+  osx_defaults: key={{ item.name }} type=float value={{ item.value }}
   loop: [{ name: InitialKeyRepeat, value: 15 }, { name: KeyRepeat, value: 1 }]
 
 - name: Disable auto-correct
