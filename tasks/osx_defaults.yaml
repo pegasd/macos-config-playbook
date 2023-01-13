@@ -23,6 +23,9 @@
 - name: Full Keyboard Access
   osx_defaults: key=AppleKeyboardUIMode type=int value=0
 
+- name: Enable keyboard repeat
+  osx_defaults: key=ApplePressAndHoldEnabled type=bool value=true
+
 - name: Keyboard repeat rate
   osx_defaults: key={{ item.name }} type=float value={{ item.value }}
   loop: [{ name: InitialKeyRepeat, value: 15 }, { name: KeyRepeat, value: 1 }]
