@@ -28,6 +28,7 @@
     brew_absent_packages: []
     brew_present_casks:
       - 1password7
+      - bitwarden
       - bettertouchtool
       - dash
       - docker
