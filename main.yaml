@@ -16,20 +16,33 @@
       - puppetlabs/puppet
     brew_absent_taps: []
     brew_present_packages:
+      - awscli
+      - colordiff
+      - cfssl
+      - gitleaks
+      - gnupg
       - gnu-sed # GNU sed is nice
       - grep # GNU grep is nice
       - htop
       - jq
-      - gnupg
+      - kubectl
+      - kubernetes-cli
       - pinentry-mac
       - pssh
+      - pwgen
+      - pylint
       - tfenv
       - unar
-    brew_absent_packages: []
+      - vim
+      - yq
+    brew_absent_packages:
+      - cvs
+      - git-flow
+      - most
+      - multitail
+      - unrar
     brew_present_casks:
       - 1password7
-      - bitwarden
-      - bettertouchtool
       - dash
       - docker
       - google-chrome
@@ -37,9 +50,13 @@
       - intellij-idea
       - istat-menus
       - iterm2
+      - pdk
       - slack
-      - vlc
-    brew_absent_casks: []
+    brew_absent_casks:
+      - terraform
+      - jetbrains-toolbox
+      - visual-studio-code
+      - openemu
     fonts:
       - font-ubuntumono-nerd-font-mono
     update_vim_plugins: false
@@ -49,16 +66,16 @@
       - name: tabular
         repo: https://github.com/godlygeek/tabular
   tasks:
-    - include: tasks/osx_defaults.yaml
+    - include_tasks: tasks/osx_defaults.yaml
       tags: [ osx_defaults ]
-    - include: tasks/iterm.yaml
+    - include_tasks: tasks/iterm.yaml
       tags: [ osx_defaults, iterm ]
-    - include: tasks/applications.yaml
+    - include_tasks: tasks/applications.yaml
       tags: [ applications ]
-    - include: tasks/mas.yaml
+    - include_tasks: tasks/mas.yaml
       tags: [ applications, mas ]
-    - include: tasks/dotfiles.yaml
+    - include_tasks: tasks/dotfiles.yaml
       tags: [ applications, dotfiles ]
-    - include: tasks/fonts.yaml
+    - include_tasks: tasks/fonts.yaml
       tags: [ fonts ]
 ...
