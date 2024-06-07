@@ -451,6 +451,8 @@
       "Screen": -2,
       "AWDS Window Option": "No",
       "Non Ascii Font": "RobotoMono-Light 12",
+      "Custom Locale": "en_US.UTF-8",
+      "Set Local Environment Vars": 0,
       "Ansi 13 Color": {
         "Green Component": 0.3333333432674408,
         "Red Component": 1,
