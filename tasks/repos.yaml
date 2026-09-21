@@ -1,0 +1,20 @@
+---
+- name: Developer directory
+  file:
+    path: '{{ dev_dir }}'
+    state: directory
+    mode: 0755
+
+#
+# Clone only. Never update: these are working checkouts and may hold
+# local commits or a dirty tree.
+#
+- name: Personal repositories
+  git:
+    dest: '{{ dev_dir }}/{{ item.name }}'
+    repo: '{{ item.repo }}'
+    update: false
+  loop: '{{ dev_repos }}'
+  loop_control:
+    label: '{{ item.name }}'
+...

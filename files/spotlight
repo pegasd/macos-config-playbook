@@ -2,8 +2,8 @@
 
 set -x -e
 
-# Close System Preferences to prevent interference
-osascript -e 'tell application "System Preferences" to quit'
+# Close System Settings to prevent interference
+osascript -e 'tell application "System Settings" to quit'
 
 ###############
 #  Spotlight  #

@@ -2,6 +2,10 @@
 #
 # Mac App Store applications
 #
+# `mas` can only install apps that are already attached to the signed-in
+# Apple Account. Sign in through the App Store app first -- `mas signin`
+# has not worked headlessly since Catalina.
+#
 - name: Ensure MAS is installed
   homebrew:
     name: mas
@@ -15,6 +19,8 @@
 
 - name: MAS present applications
   command: mas install '{{ item.id }}'
-  with_items: '{{ mas_installed_apps }}'
+  loop: '{{ mas_installed_apps }}'
+  loop_control:
+    label: '{{ item.name }}'
   when: 'item.id | string not in mas_list.stdout'
 ...

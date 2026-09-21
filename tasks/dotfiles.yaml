@@ -11,7 +11,7 @@
     state: directory
     mode: 0700
 
-- when: vim_plugins
+- when: vim_plugins | length > 0
   block:
     - name: Vim plugins directory
       file:

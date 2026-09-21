@@ -9,9 +9,9 @@
   osx_defaults: domain=com.apple.screensaver key={{ item.name }} type=int value={{ item.value }}
   loop: [{ name: askForPassword, value: 1 }, { name: askForPasswordDelay, value: 5 }]
 
-- name: Upper-Left Corner -> Screen Saver
+- name: Upper-Left Corner -> disabled
   osx_defaults: domain=com.apple.dock key={{ item.name }} type=int value={{ item.value }}
-  loop: [{ name: wvous-tl-corner, value: 5 }, { name: wvous-tl-modifier, value: 0 }]
+  loop: [{ name: wvous-tl-corner, value: 1 }, { name: wvous-tl-modifier, value: 0 }]
 
 #
 # Usability
@@ -28,28 +28,17 @@
 
 - name: Keyboard repeat rate
   osx_defaults: key={{ item.name }} type=float value={{ item.value }}
-  loop: [{ name: InitialKeyRepeat, value: 15 }, { name: KeyRepeat, value: 1 }]
+  loop: [{ name: InitialKeyRepeat, value: 15 }, { name: KeyRepeat, value: 2 }]
 
 - name: Disable auto-correct
   osx_defaults: key=NSAutomaticSpellingCorrectionEnabled type=bool value=false
 
-- name: Zoom
-  osx_defaults:
-    domain: com.apple.universalaccess
-    key: '{{ item.name }}'
-    type: '{{ item.type }}'
-    value: '{{ item.value }}'
-  loop:
-    - { name: closeViewScrollWheelToggle, type: bool, value: true }
-    - { name: HIDScrollZoomModifierMask, type: int, value: 262144 }
-    - { name: closeViewPanningMode, type: int, value: 0 }
-    - { name: closeViewScrollWheelModifiersInt, type: int, value: 262144 }
-    - { name: closeViewZoomFollowsFocus, type: bool, value: false }
-    - { name: speakItemUnderMouseAfterDelayMode, type: int, value: 0 }
-  become: yes
-
 #
 # Color theme
+#
+# AppleAquaColorVariant is pre-Mojave and kept only because it is still
+# honoured by a few older apps. AppleAccentColor is the modern key;
+# -1 means 'no accent colour' (Graphite).
 #
 - name: Color Theme
   osx_defaults:
@@ -58,7 +47,8 @@
     value: '{{ item.value }}'
   loop:
     - { name: AppleInterfaceStyle, type: string,  value: Dark }
-    - { name: AppleHighlightColor, type: string, value: '0.752941 0.964706 0.678431 Green' }
+    - { name: AppleHighlightColor, type: string, value: '0.847059 0.847059 0.862745 Graphite' }
+    - { name: AppleAccentColor, type: int, value: -1 }
     - { name: AppleAquaColorVariant, type: int, value: 6 }
 
 #
@@ -90,12 +80,12 @@
     type: '{{ item.type }}'
     value: '{{ item.value }}'
   loop:
-    - { name: tilesize, type: float, value: 35 }
-    - { name: largesize, type: float, value: 66 }
+    - { name: tilesize, type: float, value: 45 }
+    - { name: largesize, type: float, value: 86 }
     - { name: magnification, type: bool, value: true }
     - { name: mineffect, type: string, value: genie }
     - { name: autohide, type: bool, value: true }
-    - { name: orientation, type: string, value: left }
+    - { name: orientation, type: string, value: right }
     - { name: persistent-apps, type: array, value: [] }
 
 #
@@ -138,24 +128,19 @@
   osx_defaults:
     domain: org.m0k.transmission
     key: '{{ item }}'
-    value: '{{ ansible_env.HOME }}/Downloads'
+    value: '{{ ansible_facts.env.HOME }}/Downloads'
   loop: [ AutoImportDirectory, NSNavLastRootDirectory, DownloadFolder ]
 
 #
-# Accessibility
+# NOTE: com.apple.universalaccess (zoom, reduceMotion) used to be managed
+# here with `become: yes`. That domain is TCC-protected on modern macOS:
+# the writes need Full Disk Access and are only read by the accessibility
+# daemon at login, so they were no-ops. See README -> Manual steps.
 #
-- name: Reduce motion
-  osx_defaults:
-    domain: com.apple.universalaccess
-    key: reduceMotion
-    type: bool
-    value: true
-  become: yes
 
 # TODO:
 # Language & Region
 # Software Update
-# Accessibility (is this even possible?)
 # Energy Saver
 # Night Shift
 # Sharing

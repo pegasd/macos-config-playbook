@@ -1,64 +1,114 @@
 ---
 - name: Configure macOS
   hosts: localhost
+  connection: local
   vars:
-    mas_signin_dialog: no
+    #
+    # Dotfiles
+    #
     update_dotfiles: true
-    dotfiles_repo: https://gitlab.com/the_pegas/dotfiles
+    dotfiles_repo: git@github.com:pegasd/dotfiles.git
+
+    #
+    # Personal repositories cloned into ~/Developer
+    #
+    dev_dir: '{{ ansible_facts.env.HOME }}/Developer'
+    dev_repos:
+      - { name: ansible-freebsd, repo: 'git@github.com:pegasd/ansible-freebsd' }
+      - { name: ansible-playbooks, repo: 'https://git.pegas.icu/pegas/ansible-playbooks.git' }
+      - { name: strudel-tracks, repo: 'git@github.com:pegasd/strudel-tracks.git' }
+
+    #
+    # Mac App Store
+    #
+    # IDs verified against the live App Store with `mas info <id>`.
+    # Do not copy IDs out of an installed app blindly: Apple relisted the
+    # iWork apps under unified IDs and the old Mac-only ones (409201541,
+    # 409183694, 409203825) are delisted -- `mas install` fails on them.
+    #
+    # Requires being signed into the App Store first -- `mas` can only install
+    # apps that are already attached to the account.
+    #
     mas_installed_apps:
-      - { name: Spark, id: 1176895641 }
-      - { name: Telegram, id: 747648890 }
-      # - { name: Xcode, id: 497799835 } # I don't need this everywhere
-      - { name: Xee, id: 639764244 }
+      - { name: Bitwarden, id: 1352778147 }
+      - { name: Spark, id: 1176895641 } # listed as "Spark Classic"
+      - { name: WireGuard, id: 1451685025 }
+      # v2RayTun (was 6476628951) has been pulled from the App Store.
+      # See README -> Manual steps.
+
+    #
+    # Homebrew
+    #
+    # homebrew/cask ships with Homebrew since 4.x; cask-versions and cask-fonts
+    # were archived in 2024. Do not tap any of them.
+    #
     brew_present_taps:
-      - homebrew/cask
-      - homebrew/cask-versions
-      - puppetlabs/puppet
+      - house-of-vanity/tap # furumi
+      - puppetlabs/puppet # pdk
     brew_absent_taps: []
     brew_present_packages:
-      - awscli
+      - ansible
+      - bitwarden-cli
+      - colima # docker runtime, in place of Docker Desktop
       - colordiff
-      - cfssl
-      - gitleaks
-      - gnupg
-      - gnu-sed # GNU sed is nice
-      - grep # GNU grep is nice
-      - htop
-      - jq
-      - kubectl
-      - kubernetes-cli
-      - pinentry-mac
-      - pssh
-      - pwgen
-      - pylint
-      - tfenv
-      - unar
-      - vim
-      - yq
-    brew_absent_packages:
-      - cvs
-      - git-flow
-      - most
-      - multitail
-      - unrar
-    brew_present_casks:
-      - 1password7
-      - dash
       - docker
+      - docker-buildx
+      - go
+      - grep # GNU grep is nice
+      - helm
+      - house-of-vanity/tap/furumi
+      - htop
+      - iperf3
+      - k9s
+      - kubectx
+      - mas
+      - pssh
+      - rbenv
+      - rclone
+      - rustup
+      - tfenv
+      - transmission-cli
+      - tree
+      - unar
+      - virtualenv
+    brew_absent_packages: []
+    brew_present_casks:
+      - battle-net
+      - claude
+      - claude-code
+      - crossover
+      - epic-games
+      - gcloud-cli # was: google-cloud-sdk
+      - gog-galaxy
       - google-chrome
-      - google-cloud-sdk
-      - intellij-idea
+      - intellij-idea-ce
       - istat-menus
       - iterm2
-      - pdk
+      - pdk # from puppetlabs/puppet
+      - private-internet-access
+      - send-to-kindle
       - slack
-    brew_absent_casks:
-      - terraform
-      - jetbrains-toolbox
-      - visual-studio-code
-      - openemu
+      - steam
+      - telegram
+      - transmission
+      - vlc
+      - yacreader
+      - zoom
+    brew_absent_casks: []
+
+    #
+    # Fonts
+    #
+    # These are the faces referenced by files/iterm_profile.json.
+    #
     fonts:
-      - font-ubuntumono-nerd-font-mono
+      - font-roboto-mono
+      - font-roboto-mono-nerd-font
+      - font-sf-mono
+
+    #
+    # Vim
+    #
     update_vim_plugins: false
     vim_plugins:
       - name: syntastic
@@ -78,4 +128,6 @@
       tags: [ applications, dotfiles ]
     - include_tasks: tasks/fonts.yaml
       tags: [ fonts ]
+    - include_tasks: tasks/repos.yaml
+      tags: [ repos ]
 ...

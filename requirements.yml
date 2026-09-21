@@ -1,0 +1,5 @@
+---
+collections:
+  - name: ansible.posix # synchronize
+  - name: community.general # homebrew*, osx_defaults
+...
