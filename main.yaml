@@ -7,7 +7,12 @@
     # Dotfiles
     #
     update_dotfiles: true
-    dotfiles_repo: git@github.com:pegasd/dotfiles.git
+    # Must be the SSH form. ~/.gitconfig_local carries
+    #   [url "git@github.com:"] insteadOf = https://github.com/
+    # so an https:// URL is rewritten to SSH at clone time anyway, and the git
+    # module then sees its configured URL differ from the recorded remote and
+    # reports 'changed' on every run.
+    dotfiles_repo: git@github.com:pegasd/dotfiles
 
     #
     # Personal repositories cloned into ~/Developer
@@ -31,6 +36,7 @@
     #
     mas_installed_apps:
       - { name: Bitwarden, id: 1352778147 }
+      - { name: Logic Pro, id: 634148309 }
       - { name: Spark, id: 1176895641 } # listed as "Spark Classic"
       - { name: WireGuard, id: 1451685025 }
       # v2RayTun (was 6476628951) has been pulled from the App Store.
@@ -44,8 +50,8 @@
     #
     brew_present_taps:
       - house-of-vanity/tap # furumi
+    brew_absent_taps:
       - puppetlabs/puppet # pdk
-    brew_absent_taps: []
     brew_present_packages:
       - ansible
       - bitwarden-cli
@@ -53,22 +59,17 @@
       - colordiff
       - docker
       - docker-buildx
-      - go
       - grep # GNU grep is nice
       - helm
       - house-of-vanity/tap/furumi
       - htop
-      - iperf3
       - k9s
       - kubectx
       - mas
       - pssh
       - rbenv
       - rclone
-      - rustup
-      - tfenv
       - transmission-cli
-      - tree
       - unar
       - virtualenv
     brew_absent_packages: []
@@ -76,23 +77,17 @@
       - battle-net
       - claude
       - claude-code
-      - crossover
       - epic-games
       - gcloud-cli # was: google-cloud-sdk
-      - gog-galaxy
       - google-chrome
       - intellij-idea-ce
       - istat-menus
       - iterm2
-      - pdk # from puppetlabs/puppet
-      - private-internet-access
-      - send-to-kindle
       - slack
       - steam
       - telegram
       - transmission
       - vlc
-      - yacreader
       - zoom
     brew_absent_casks: []
 
@@ -102,7 +97,6 @@
     # These are the faces referenced by files/iterm_profile.json.
     #
     fonts:
-      - font-roboto-mono
       - font-roboto-mono-nerd-font
       - font-sf-mono
 
@@ -116,18 +110,18 @@
       - name: tabular
         repo: https://github.com/godlygeek/tabular
   tasks:
-    - include_tasks: tasks/osx_defaults.yaml
+    - import_tasks: tasks/osx_defaults.yaml
       tags: [ osx_defaults ]
-    - include_tasks: tasks/iterm.yaml
+    - import_tasks: tasks/iterm.yaml
       tags: [ osx_defaults, iterm ]
-    - include_tasks: tasks/applications.yaml
+    - import_tasks: tasks/applications.yaml
       tags: [ applications ]
-    - include_tasks: tasks/mas.yaml
+    - import_tasks: tasks/mas.yaml
       tags: [ applications, mas ]
-    - include_tasks: tasks/dotfiles.yaml
+    - import_tasks: tasks/dotfiles.yaml
       tags: [ applications, dotfiles ]
-    - include_tasks: tasks/fonts.yaml
+    - import_tasks: tasks/fonts.yaml
       tags: [ fonts ]
-    - include_tasks: tasks/repos.yaml
+    - import_tasks: tasks/repos.yaml
       tags: [ repos ]
 ...

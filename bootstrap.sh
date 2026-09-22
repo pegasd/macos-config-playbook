@@ -23,18 +23,6 @@ else
 fi
 
 #
-# Rosetta 2 -- still needed by a few Intel-only apps (Battle.net games, CrossOver bottles)
-#
-if [ "$(uname -m)" = arm64 ]; then
-  if /usr/bin/pgrep -q oahd; then
-    say 'Rosetta 2 already installed'
-  else
-    say 'Installing Rosetta 2'
-    softwareupdate --install-rosetta --agree-to-license
-  fi
-fi
-
-#
 # Homebrew
 #
 if have brew; then

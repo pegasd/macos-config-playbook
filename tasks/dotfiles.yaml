@@ -1,16 +1,4 @@
 ---
-- name: history directory
-  file:
-    path: ~/.history
-    state: directory
-    mode: 0700
-
-- name: gnupg directory
-  file:
-    path: ~/.gnupg
-    state: directory
-    mode: 0700
-
 - when: vim_plugins | length > 0
   block:
     - name: Vim plugins directory
@@ -46,4 +34,18 @@
       - '--exclude=.git'
       - '--exclude=LICENSE'
       - '--exclude=*.md'
+      # Without this the top-level dir mtime always differs and the task
+      # reports 'changed' on every run.
+      - '--omit-dir-times'
+
+#
+# After the rsync: it applies the repository's own modes (0755), so these
+# have to run last or GnuPG and the history dir end up world-readable.
+#
+- name: Private directories
+  file:
+    path: '~/{{ item }}'
+    state: directory
+    mode: 0700
+  loop: [ .history, .gnupg ]
 ...

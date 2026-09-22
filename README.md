@@ -2,14 +2,19 @@
 
 Ansible playbook that takes a freshly installed Mac to a working machine.
 
-Targets macOS 26 (Tahoe) and later on Apple silicon.
+Targets macOS 27 and later on Apple silicon.
+
+**Rosetta 2 is gone as of macOS 27** -- there is no x86_64 translation at all
+(`arch -x86_64` fails with "Bad CPU type"). Everything installed here is
+arm64-native. Intel-only software was dropped: CrossOver and its Wine bottles,
+GOG Galaxy, and anything that relied on them.
 
 ## Clean install, start to finish
 
 ```bash
 git clone git@github.com:pegasd/macos-config-playbook.git
 cd macos-config-playbook
-./bootstrap.sh          # CLT, Rosetta 2, Homebrew, Ansible, collections
+./bootstrap.sh          # CLT, Homebrew, Ansible, collections
 ansible-playbook main.yaml
 ```
 
@@ -44,24 +49,6 @@ ansible-playbook main.yaml --tags applications
 ansible-playbook main.yaml --skip-tags mas
 ```
 
-## Secrets and identity
-
-Nothing secret lives in this repository, and the playbook will not create any
-of it for you. Restore these from Bitwarden or a backup before the first run:
-
-| Path | Notes |
-| --- | --- |
-| `~/.ssh/id_ed25519{,.pub}` | Needed by the dotfiles and `repos` tasks |
-| `~/.ssh/config` | Host aliases |
-| `~/.ssh/authorized_keys` | Inbound SSH |
-| `~/.ssh/google_compute_engine{,.pub}` | GCE |
-| `~/.gitconfig_local` | `user.name` / `user.email`, `includeIf` for work |
-| `~/.gitconfig_iow` | Work identity, included conditionally |
-| `~/.netrc` | |
-
-`~/.gitconfig` itself ships in the dotfiles repo and only `include`s the two
-local files above.
-
 ## What is managed where
 
 - **Packages, casks, App Store apps, fonts** -- var lists at the top of
@@ -80,10 +67,6 @@ installed -- Apple relists apps under new IDs and the old ones stop working:
 mas list                  # what is installed, with its ID
 mas info <id>             # "No apps found" means the ID is dead
 ```
-
-Pages, Numbers and Keynote all moved to unified iOS/macOS listings; the
-Mac-only IDs this repo used to carry (`409201541`, `409203825`, `409183694`)
-are delisted and `mas install` fails on them.
 
 ### Scripts
 
@@ -110,7 +93,8 @@ Things macOS no longer lets a script do, in rough order of annoyance:
   item.
 - **Blizzard games** (StarCraft, StarCraft II, Diablo III, Hearthstone,
   Warcraft III) -- installed through the `battle-net` cask once it is running.
-- **Steam / Epic / GOG libraries** -- the launchers are casks, the games are not.
+- **Steam library** -- the launcher is a cask, the games are not.
+- **Epic Games Launcher** -- installed manually; not in the cask list.
 - **Xcode** -- only install it if you actually need it. The Command-Line Tools
   that `bootstrap.sh` installs are enough for Homebrew and everything here.
 
