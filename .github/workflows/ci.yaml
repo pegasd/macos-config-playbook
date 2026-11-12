@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate and test macOS preferences
+    runs-on: xcode-27
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    env:
+      ANSIBLE_NOCOLOR: '1'
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+
+      - name: Install Ansible and collections
+        run: |
+          python -m pip install ansible
+          ansible-galaxy collection install -r requirements.yml
+
+      - name: Check shell and JSON syntax
+        run: |
+          for script in bootstrap.sh files/other_defaults files/spotlight; do
+            bash -n "$script"
+          done
+          python -m json.tool files/iterm_profile.json > /dev/null
+
+      - name: Check playbook syntax
+        run: ansible-playbook main.yaml --syntax-check
+
+      - name: Apply macOS preferences and iTerm profile
+        run: ansible-playbook main.yaml --tags osx_defaults
+
+      - name: Check idempotence
+        run: |
+          ansible-playbook main.yaml --tags osx_defaults | tee "$RUNNER_TEMP/idempotence.log"
+          if ! grep -Eq '^localhost[[:space:]]+:.*changed=0[[:space:]]+unreachable=0[[:space:]]+failed=0' "$RUNNER_TEMP/idempotence.log"; then
+            echo '::error::The second run must finish without changes or failures.'
+            exit 1
+          fi

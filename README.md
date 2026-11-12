@@ -126,6 +126,18 @@ Review diffs locally: they may include personal configuration. Package and
 clone tasks are excluded because they can need network access or prerequisites
 that are missing on a fresh machine.
 
+### Continuous integration
+
+GitHub Actions runs on pushes, pull requests, and manual dispatches. It checks
+shell, JSON, and playbook syntax, then applies the `osx_defaults` tag (including
+the iTerm profile) twice and requires zero changes on the second run.
+
+CI uses GitHub's [macOS 27 ARM runner](https://github.com/actions/runner-images/blob/main/images/macos/xcode-27-arm64-Readme.md),
+currently available under the `xcode-27` preview label. It does not run
+`bootstrap.sh`, install applications or fonts, access the App Store, sync
+dotfiles, or clone personal repositories. Those steps require separate
+verification on a provisioned Mac.
+
 ## Contributing
 
 Feel free to submit issues, PRs, or just comment.
