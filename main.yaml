@@ -59,6 +59,7 @@
       - colordiff
       - docker
       - docker-buildx
+      - gh
       - grep # GNU grep is nice
       - helm
       - house-of-vanity/tap/furumi
@@ -77,12 +78,15 @@
       - battle-net
       - claude
       - claude-code
+      - codex
+      - discord
       - epic-games
       - gcloud-cli # was: google-cloud-sdk
       - google-chrome
       - intellij-idea-ce
       - istat-menus
       - iterm2
+      - notion
       - slack
       - steam
       - telegram

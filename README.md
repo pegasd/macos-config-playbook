@@ -4,10 +4,10 @@ Ansible playbook that takes a freshly installed Mac to a working machine.
 
 Targets macOS 27 and later on Apple silicon.
 
-**Rosetta 2 is gone as of macOS 27** -- there is no x86_64 translation at all
-(`arch -x86_64` fails with "Bad CPU type"). Everything installed here is
-arm64-native. Intel-only software was dropped: CrossOver and its Wine bottles,
-GOG Galaxy, and anything that relied on them.
+[Rosetta remains supported through macOS 27](https://support.apple.com/en-gb/102527).
+General-purpose Intel app support ends with macOS 28. This playbook does not
+install Rosetta or manage CrossOver, Wine bottles, or GOG Galaxy; some games
+installed through the launchers may still require Rosetta.
 
 ## Clean install, start to finish
 
@@ -24,13 +24,14 @@ installer, App Store sign-in).
 
 Two things must be in place **before** `ansible-playbook`:
 
-- **Signed into the App Store**, or every `mas` task is skipped. `mas` only
-  installs apps already attached to the account.
+- **Signed into the App Store**, or missing App Store apps fail to install.
+  `mas install` installs apps already attached to the account.
 - **An SSH key in the agent**, or the dotfiles and repository clones fail.
   See [Secrets and identity](#secrets-and-identity).
 
-Passwordless sudo is no longer required: nothing in the playbook uses
-`become` any more.
+The playbook does not use `become`. Homebrew cask installers and
+[`mas install`](https://github.com/mas-cli/mas#commands) can still require sudo
+credentials; run interactively and authenticate when requested.
 
 ## Tags
 
@@ -94,9 +95,36 @@ Things macOS no longer lets a script do, in rough order of annoyance:
 - **Blizzard games** (StarCraft, StarCraft II, Diablo III, Hearthstone,
   Warcraft III) -- installed through the `battle-net` cask once it is running.
 - **Steam library** -- the launcher is a cask, the games are not.
-- **Epic Games Launcher** -- installed manually; not in the cask list.
+- **Epic Games library** -- the launcher is managed by the `epic-games` cask;
+  install games through the launcher.
 - **Xcode** -- only install it if you actually need it. The Command-Line Tools
   that `bootstrap.sh` installs are enough for Homebrew and everything here.
+
+## Secrets and identity
+
+Create or restore your SSH key, add its public key to the Git hosting accounts,
+and load it into the agent before cloning private repositories:
+
+```bash
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+ssh -T git@github.com
+```
+
+Use your actual key path. Verify host fingerprints before accepting new hosts.
+Restore `~/.gitconfig_local` and other private configuration separately; keep
+secrets out of this repository.
+
+## Verification
+
+```bash
+ansible-playbook main.yaml --syntax-check
+ansible-playbook main.yaml --check --diff --skip-tags applications,mas,dotfiles,repos
+```
+
+The second command previews preferences and fonts without applying them.
+Review diffs locally: they may include personal configuration. Package and
+clone tasks are excluded because they can need network access or prerequisites
+that are missing on a fresh machine.
 
 ## Contributing
 

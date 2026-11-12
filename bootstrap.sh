@@ -5,6 +5,8 @@
 #
 set -euo pipefail
 
+cd "$(dirname "$0")"
+
 say() { printf '\n\033[1;32m==>\033[0m %s\n' "$*"; }
 have() { command -v "$1" >/dev/null 2>&1; }
 

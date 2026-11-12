@@ -5,7 +5,7 @@
 - name: Disable Password Hints at Login
   osx_defaults: domain=com.apple.loginwindow key=RetriesUntilHint type=int value=0
 
-- name: Require password immediately after sleep or screen saver
+- name: Require password five seconds after sleep or screen saver
   osx_defaults: domain=com.apple.screensaver key={{ item.name }} type=int value={{ item.value }}
   loop: [{ name: askForPassword, value: 1 }, { name: askForPasswordDelay, value: 5 }]
 
@@ -20,11 +20,11 @@
   osx_defaults: key={{ item }} type=bool value=false
   loop: [ NSAutomaticDashSubstitutionEnabled, NSAutomaticQuoteSubstitutionEnabled ]
 
-- name: Full Keyboard Access
+- name: Keyboard navigation for text boxes and lists
   osx_defaults: key=AppleKeyboardUIMode type=int value=0
 
 - name: Enable keyboard repeat
-  osx_defaults: key=ApplePressAndHoldEnabled type=bool value=true
+  osx_defaults: key=ApplePressAndHoldEnabled type=bool value=false
 
 - name: Keyboard repeat rate
   osx_defaults: key={{ item.name }} type=float value={{ item.value }}
