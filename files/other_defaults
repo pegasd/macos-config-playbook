@@ -2,8 +2,8 @@
 
 set -x -e
 
-# Close System Preferences to prevent interference
-osascript -e 'tell application "System Preferences" to quit'
+# Close System Settings to prevent interference
+osascript -e 'tell application "System Settings" to quit'
 
 ##############
 #  Keyboard  #
@@ -29,6 +29,7 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 \
 #################
 
 # Screenshot location
+mkdir -p ~/Desktop/screenshots
 defaults write com.apple.screencapture location -string ~/Desktop/screenshots
 
 # Restart defaults server to apply settings
@@ -38,5 +39,8 @@ killall cfprefsd
 #  Google Chrome  #
 ###################
 
+# NOTE: com.apple.universalaccess is TCC-protected. If the Chrome shortcuts do
+# not show up, grant Full Disk Access to the terminal running this script, or
+# tick Chrome under System Settings > Keyboard > Keyboard Shortcuts > App Shortcuts.
 sudo defaults write com.apple.universalaccess com.apple.custommenu.apps -array com.google.Chrome
 defaults write com.google.Chrome NSUserKeyEquivalents -dict 'Select Next Tab' '@$]' 'Select Previous Tab' '@$['

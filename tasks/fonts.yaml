@@ -1,9 +1,8 @@
 ---
-- name: Homebrew Fonts cask tap
-  homebrew_tap:
-    name: homebrew/cask-fonts
-    state: present
-
+#
+# homebrew/cask-fonts was archived in 2024 -- font casks now live in
+# homebrew/cask, which ships with Homebrew. No tap required.
+#
 - name: Fonts
   homebrew_cask:
     name: '{{ item }}'

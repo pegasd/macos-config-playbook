@@ -1,64 +1,120 @@
 ---
 - name: Configure macOS
   hosts: localhost
+  connection: local
   vars:
-    mas_signin_dialog: no
+    #
+    # Dotfiles
+    #
     update_dotfiles: true
-    dotfiles_repo: https://gitlab.com/the_pegas/dotfiles
+    # Must be the SSH form. ~/.gitconfig_local carries
+    #   [url "git@github.com:"] insteadOf = https://github.com/
+    # so an https:// URL is rewritten to SSH at clone time anyway, and the git
+    # module then sees its configured URL differ from the recorded remote and
+    # reports 'changed' on every run.
+    dotfiles_repo: git@github.com:pegasd/dotfiles
+
+    #
+    # Personal repositories cloned into ~/Developer
+    #
+    dev_dir: '{{ ansible_facts.env.HOME }}/Developer'
+    dev_repos:
+      - { name: ansible-freebsd, repo: 'git@github.com:pegasd/ansible-freebsd' }
+      - { name: ansible-playbooks, repo: 'https://git.pegas.icu/pegas/ansible-playbooks.git' }
+      - { name: strudel-tracks, repo: 'git@github.com:pegasd/strudel-tracks.git' }
+
+    #
+    # Mac App Store
+    #
+    # IDs verified against the live App Store with `mas info <id>`.
+    # Do not copy IDs out of an installed app blindly: Apple relisted the
+    # iWork apps under unified IDs and the old Mac-only ones (409201541,
+    # 409183694, 409203825) are delisted -- `mas install` fails on them.
+    #
+    # Requires being signed into the App Store first -- `mas` can only install
+    # apps that are already attached to the account.
+    #
     mas_installed_apps:
-      - { name: Spark, id: 1176895641 }
-      - { name: Telegram, id: 747648890 }
-      # - { name: Xcode, id: 497799835 } # I don't need this everywhere
-      - { name: Xee, id: 639764244 }
+      - { name: Bitwarden, id: 1352778147 }
+      - { name: Logic Pro, id: 634148309 }
+      - { name: Spark, id: 1176895641 } # listed as "Spark Classic"
+      - { name: WireGuard, id: 1451685025 }
+      # v2RayTun (was 6476628951) has been pulled from the App Store.
+      # See README -> Manual steps.
+
+    #
+    # Homebrew
+    #
+    # homebrew/cask ships with Homebrew since 4.x; cask-versions and cask-fonts
+    # were archived in 2024. Do not tap any of them.
+    #
     brew_present_taps:
-      - homebrew/cask
-      - homebrew/cask-versions
-      - puppetlabs/puppet
-    brew_absent_taps: []
+      - house-of-vanity/tap # furumi
+    brew_absent_taps:
+      - puppetlabs/puppet # pdk
     brew_present_packages:
-      - awscli
+      - ansible
+      - bitwarden-cli
+      - cmus
+      - colima # docker runtime, in place of Docker Desktop
       - colordiff
-      - cfssl
-      - gitleaks
-      - gnupg
-      - gnu-sed # GNU sed is nice
-      - grep # GNU grep is nice
-      - htop
-      - jq
-      - kubectl
-      - kubernetes-cli
-      - pinentry-mac
-      - pssh
-      - pwgen
-      - pylint
-      - tfenv
-      - unar
-      - vim
-      - yq
-    brew_absent_packages:
-      - cvs
-      - git-flow
-      - most
-      - multitail
-      - unrar
-    brew_present_casks:
-      - 1password7
-      - dash
       - docker
+      - docker-buildx
+      - fastfetch
+      - gh
+      - grep # GNU grep is nice
+      - helm
+      - house-of-vanity/tap/furumi
+      - htop
+      - k9s
+      - kubectx
+      - kubernetes-cli
+      - mas
+      - pssh
+      - rbenv
+      - rclone
+      - shared-mime-info
+      - transmission-cli
+      - unar
+      - virtualenv
+    brew_absent_packages: []
+    brew_present_casks:
+      - battle-net
+      - claude
+      - claude-code
+      - codex
+      - discord
+      - epic-games
+      - gcloud-cli # was: google-cloud-sdk
       - google-chrome
-      - google-cloud-sdk
-      - intellij-idea
+      - inkscape
+      - intellij-idea-ce
       - istat-menus
       - iterm2
-      - pdk
+      - moonlight
+      - notion
       - slack
-    brew_absent_casks:
-      - terraform
-      - jetbrains-toolbox
-      - visual-studio-code
-      - openemu
+      - steam
+      - telegram
+      - transmission
+      - vlc
+      - yacreader
+      - zoom
+    brew_absent_casks: []
+
+    #
+    # Fonts
+    #
+    # Terminal fonts and fallback symbols.
+    #
     fonts:
-      - font-ubuntumono-nerd-font-mono
+      - font-roboto-mono-nerd-font
+      - font-sf-mono
+      - font-symbols-only-nerd-font
+
+    #
+    # Vim
+    #
     update_vim_plugins: false
     vim_plugins:
       - name: syntastic
@@ -66,16 +122,18 @@
       - name: tabular
         repo: https://github.com/godlygeek/tabular
   tasks:
-    - include_tasks: tasks/osx_defaults.yaml
+    - import_tasks: tasks/osx_defaults.yaml
       tags: [ osx_defaults ]
-    - include_tasks: tasks/iterm.yaml
+    - import_tasks: tasks/iterm.yaml
       tags: [ osx_defaults, iterm ]
-    - include_tasks: tasks/applications.yaml
+    - import_tasks: tasks/applications.yaml
       tags: [ applications ]
-    - include_tasks: tasks/mas.yaml
+    - import_tasks: tasks/mas.yaml
       tags: [ applications, mas ]
-    - include_tasks: tasks/dotfiles.yaml
+    - import_tasks: tasks/dotfiles.yaml
       tags: [ applications, dotfiles ]
-    - include_tasks: tasks/fonts.yaml
+    - import_tasks: tasks/fonts.yaml
       tags: [ fonts ]
+    - import_tasks: tasks/repos.yaml
+      tags: [ repos ]
 ...
