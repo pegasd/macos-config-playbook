@@ -55,10 +55,12 @@
     brew_present_packages:
       - ansible
       - bitwarden-cli
+      - cmus
       - colima # docker runtime, in place of Docker Desktop
       - colordiff
       - docker
       - docker-buildx
+      - fastfetch
       - gh
       - grep # GNU grep is nice
       - helm
@@ -66,10 +68,12 @@
       - htop
       - k9s
       - kubectx
+      - kubernetes-cli
       - mas
       - pssh
       - rbenv
       - rclone
+      - shared-mime-info
       - transmission-cli
       - unar
       - virtualenv
@@ -83,26 +87,30 @@
       - epic-games
       - gcloud-cli # was: google-cloud-sdk
       - google-chrome
+      - inkscape
       - intellij-idea-ce
       - istat-menus
       - iterm2
+      - moonlight
       - notion
       - slack
       - steam
       - telegram
       - transmission
       - vlc
+      - yacreader
       - zoom
     brew_absent_casks: []
 
     #
     # Fonts
     #
-    # These are the faces referenced by files/iterm_profile.json.
+    # Terminal fonts and fallback symbols.
     #
     fonts:
       - font-roboto-mono-nerd-font
       - font-sf-mono
+      - font-symbols-only-nerd-font
 
     #
     # Vim
