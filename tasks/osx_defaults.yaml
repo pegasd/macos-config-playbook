@@ -5,9 +5,8 @@
 - name: Disable Password Hints at Login
   osx_defaults: domain=com.apple.loginwindow key=RetriesUntilHint type=int value=0
 
-- name: Require password five seconds after sleep or screen saver
-  osx_defaults: domain=com.apple.screensaver key={{ item.name }} type=int value={{ item.value }}
-  loop: [{ name: askForPassword, value: 1 }, { name: askForPasswordDelay, value: 5 }]
+# Set and verify the active screen-lock policy in Lock Screen settings.
+# Legacy user defaults can disagree with it; see README -> Manual steps.
 
 - name: Upper-Left Corner -> disabled
   osx_defaults: domain=com.apple.dock key={{ item.name }} type=int value={{ item.value }}
@@ -133,9 +132,8 @@
 
 #
 # NOTE: com.apple.universalaccess (zoom, reduceMotion) used to be managed
-# here with `become: yes`. That domain is TCC-protected on modern macOS:
-# the writes need Full Disk Access and are only read by the accessibility
-# daemon at login, so they were no-ops. See README -> Manual steps.
+# here with `become: yes`. Direct writes can be blocked or ignored on modern
+# macOS. Configure these in System Settings; see README -> Manual steps.
 #
 
 # TODO:

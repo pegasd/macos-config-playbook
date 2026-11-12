@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Bring a freshly installed Mac to the point where `ansible-playbook main.yaml`
-# can run. Safe to re-run: every step is a no-op once satisfied.
+# can run. Safe to re-run; dependency versions are not pinned.
 #
 set -euo pipefail
 
@@ -11,6 +11,9 @@ say() { printf '\n\033[1;32m==>\033[0m %s\n' "$*"; }
 have() { command -v "$1" >/dev/null 2>&1; }
 
 [ "$(uname -s)" = Darwin ] || { echo 'macOS only.' >&2; exit 1; }
+[ "$(uname -m)" = arm64 ] || { echo 'Run natively on Apple silicon.' >&2; exit 1; }
+macos_version=$(sw_vers -productVersion)
+[ "${macos_version%%.*}" -ge 27 ] || { echo 'macOS 27 or later required.' >&2; exit 1; }
 
 #
 # Xcode Command-Line Tools
@@ -28,20 +31,25 @@ fi
 # Homebrew
 #
 if have brew; then
-  say "Homebrew already installed ($(brew --prefix))"
+  BREW_BIN=$(command -v brew)
+elif [ -x /opt/homebrew/bin/brew ]; then
+  BREW_BIN=/opt/homebrew/bin/brew
 else
   say 'Installing Homebrew'
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  installer=$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+  /bin/bash -c "$installer"
+  BREW_BIN=/opt/homebrew/bin/brew
 fi
 
-BREW_PREFIX=$(/opt/homebrew/bin/brew --prefix 2>/dev/null || /usr/local/bin/brew --prefix)
-eval "$("${BREW_PREFIX}/bin/brew" shellenv)"
+say "Homebrew available ($("$BREW_BIN" --prefix))"
+brew_shellenv=$("$BREW_BIN" shellenv)
+eval "$brew_shellenv"
 
 #
 # Ansible + the collections the playbook uses
 #
 if have ansible-playbook; then
-  say "Ansible already installed ($(ansible --version | head -1))"
+  say "Ansible already installed ($(ansible --version | sed -n '1p'))"
 else
   say 'Installing Ansible'
   brew install ansible

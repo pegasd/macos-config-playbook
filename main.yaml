@@ -26,10 +26,9 @@
     #
     # Mac App Store
     #
-    # IDs verified against the live App Store with `mas info <id>`.
-    # Do not copy IDs out of an installed app blindly: Apple relisted the
-    # iWork apps under unified IDs and the old Mac-only ones (409201541,
-    # 409183694, 409203825) are delisted -- `mas install` fails on them.
+    # IDs verified against the US App Store on 2026-11-12.
+    # Check live availability with `mas lookup`; installed receipts can retain
+    # IDs for apps that were relisted or removed from a storefront.
     #
     # Requires being signed into the App Store first -- `mas` can only install
     # apps that are already attached to the account.
@@ -39,7 +38,7 @@
       - { name: Logic Pro, id: 634148309 }
       - { name: Spark, id: 1176895641 } # listed as "Spark Classic"
       - { name: WireGuard, id: 1451685025 }
-      # v2RayTun (was 6476628951) has been pulled from the App Store.
+      # v2RayTun (6476628951) is intentionally unmanaged.
       # See README -> Manual steps.
 
     #
@@ -88,7 +87,6 @@
       - gcloud-cli # was: google-cloud-sdk
       - google-chrome
       - inkscape
-      - intellij-idea-ce
       - istat-menus
       - iterm2
       - moonlight
@@ -100,7 +98,8 @@
       - vlc
       - yacreader
       - zoom
-    brew_absent_casks: []
+    brew_absent_casks:
+      - intellij-idea-ce # discontinued upstream
 
     #
     # Fonts

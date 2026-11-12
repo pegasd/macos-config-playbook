@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-set -x -e
+set -euo pipefail
+
+[ "$(uname -s)" = Darwin ] || { echo 'macOS only.' >&2; exit 1; }
 
 # Close System Settings to prevent interference
 osascript -e 'tell application "System Settings" to quit'
@@ -9,7 +11,8 @@ osascript -e 'tell application "System Settings" to quit'
 #  Spotlight  #
 ###############
 
-# Spotlight categories
+# Legacy category preferences. Verify their effect in System Settings;
+# modern Spotlight may ignore individual orderedItems entries.
 defaults write com.apple.spotlight orderedItems -array \
   '<dict> <key>enabled</key> <true/>  <key>name</key> <string>APPLICATIONS</string>               </dict>' \
   '<dict> <key>enabled</key> <true/>  <key>name</key> <string>SYSTEM_PREFS</string>               </dict>' \
@@ -31,20 +34,13 @@ defaults write com.apple.spotlight orderedItems -array \
   '<dict> <key>enabled</key> <false/> <key>name</key> <string>FONTS</string>                      </dict>' \
   '<dict> <key>enabled</key> <false/> <key>name</key> <string>MENU_EXPRESSION</string>            </dict>' \
   '<dict> <key>enabled</key> <false/> <key>name</key> <string>MENU_SPOTLIGHT_SUGGESTIONS</string> </dict>' \
-  '<dict> <key>enabled</key> <false/> <key>name</key> <string>MENU_OTHER</string>                 </dict>' \
+  '<dict> <key>enabled</key> <false/> <key>name</key> <string>MENU_OTHER</string>                 </dict>'
 
-# Disable Spotlight indexing for any volume that gets mounted and has not yet
-# been indexed before.
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-
-# Load new settings before rebuilding the index
-sudo killall mds > /dev/null 2>&1
+# Configure excluded disks in System Settings > Spotlight > Search Privacy.
+# /.Spotlight-V100 is not a supported configuration path on modern macOS.
 
 # Make sure indexing is enabled for the main volume
-sudo mdutil -i on / > /dev/null
+sudo mdutil -i on /
 
 # Rebuild the index from scratch
-sudo mdutil -E / > /dev/null
-
-# Restart defaults server to apply settings
-killall cfprefsd
+sudo mdutil -E /
